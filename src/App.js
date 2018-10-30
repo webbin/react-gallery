@@ -55,8 +55,8 @@ class App extends Component {
 
 			reader.read().then(handleArray)
 				.then(() => {
-					const data = JSON.parse(resultString);
-					console.log('data = ', data);
+					// const data = JSON.parse(resultString);
+					// console.log('data = ', data);
 				});
 
 
@@ -135,6 +135,8 @@ class App extends Component {
 				<p className="App-intro">
 					To get started, edit <code>src/App.js</code> and save to reload.
 				</p>
+
+				<a href='./textEditor/editor.html'> go to text eiditor </a>
 			</div>
 		);
 	}

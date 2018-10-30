@@ -26,3 +26,15 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.time-hint-text {
+    font-size: 40px;
+}
+
+.off-work-title {
+    font-size: 60px;
+}
+
+.count-down-text {
+    font-size: 50px;
+}

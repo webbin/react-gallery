@@ -136,7 +136,6 @@ class App extends Component {
 					To get started, edit <code>src/App.js</code> and save to reload.
 				</p>
 
-				<a href='./textEditor/editor.html'> go to text eiditor </a>
 			</div>
 		);
 	}

@@ -27,6 +27,13 @@ class App extends Component {
 
 	}
 
+	fetchMedium = () => {
+		fetch('https://www.medium.com').then((result) => {
+			console.log(result);
+
+		});
+	};
+
 	getCountDown = () => {
 		const date = new Date();
 
@@ -80,7 +87,7 @@ class App extends Component {
 		const hour = this.state.hour > 12 ? `下午${this.state.hour - 12}时` : `上午${this.state.hour}时`;
 		return (
 			<div className="App">
-				<p className="time-hint-text"> 现在是 {this.state.year}年{this.state.month}月{this.state.day}日  {hour}{this.state.minute}分{this.state.second}秒 </p>
+				<p className="time-hint-text" onClick={this.fetchMedium}> 现在是 {this.state.year}年{this.state.month}月{this.state.day}日  {hour}{this.state.minute}分{this.state.second}秒 </p>
 
 				{this.state.countDown ? this.renderCountDown() : <p className="off-work-title">解放了解放了</p>}
 			</div>

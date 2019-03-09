@@ -1,0 +1,11 @@
+
+
+.file_item {
+    padding: 10px 20px;
+    font-size: large;
+}
+
+.file_list {
+    display: flex;
+}
+

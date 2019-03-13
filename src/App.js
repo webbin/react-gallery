@@ -3,6 +3,7 @@ import FileList from "./fileManage/FileList";
 import logo from './logo.svg';
 import './App.css';
 import {songHistory} from './network/config';
+import ImageFileList from "./test/ImageFileList";
 
 class App extends Component {
 
@@ -112,7 +113,7 @@ class App extends Component {
 					现在是 {this.state.year}年{this.state.month}月{this.state.day}日
 					{hour}{this.state.minute}分{this.state.second}秒
 				</p>
-				<FileList />
+				<ImageFileList />
 				{/*{this.state.countDown ? this.renderCountDown() : <p className='off-work-title'>解放了解放了</p>}*/}
 			</div>
 		);

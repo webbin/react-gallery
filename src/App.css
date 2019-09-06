@@ -38,3 +38,9 @@
 .count-down-text {
     font-size: 50px;
 }
+
+div button {
+    background-color: cadetblue;
+    border-radius: 20px;
+    padding: 5px 20px 5px 20px;
+}

@@ -6,6 +6,7 @@ import {songHistory} from './network/config';
 import ImageFileList from "./test/ImageFileList";
 import TimeView from "./test/TimeView";
 import LocationView from "./test/LocationView";
+import BingImageList from "./pages/bing/BingImageList";
 
 class App extends Component {
 
@@ -115,11 +116,21 @@ class App extends Component {
 					现在是 {this.state.year}年{this.state.month}月{this.state.day}日
 					{hour}{this.state.minute}分{this.state.second}秒
 				</p>
+				<form ref={(ref) => this.form = ref } id="form">
+					<input type="file" name="file" />
+				</form>
 
+				<button onClick={() => {
+					const formData = new FormData();
+					// formData.append('file', e.target.files[0]);
+					console.log(formData);
+				}}>
+					print form data
+				</button>
 
 				<TimeView />
 				<LocationView />
-				{/*{this.state.countDown ? this.renderCountDown() : <p className='off-work-title'>解放了解放了</p>}*/}
+				<BingImageList />
 			</div>
 		);
 	}

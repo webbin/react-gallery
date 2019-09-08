@@ -39,17 +39,19 @@ export default class BingImageList extends React.PureComponent {
 	}
 
 	renderImageCell = (item, index) => {
+		if (!item) return null;
 		const { url } = item;
 		return (
-			<img alt={url} key={`${index}`} className="cell" src={url} />
+			<img alt={url} key={`${index}`} src={url} />
 		)
 	};
 
 	renderGrid = () => {
 		const { list } = this.state;
 		return (
-			<div className="grid">
-				{list.map(this.renderImageCell)}
+			<div>
+				{this.renderImageCell(list[0], 0)}
+				{this.renderImageCell(list[1], 1)}
 			</div>
 		)
 	};

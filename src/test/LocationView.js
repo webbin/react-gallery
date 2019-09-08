@@ -5,23 +5,50 @@ import { setLocationName } from '../actions/locationActions';
 
 
 class LocationView extends React.PureComponent {
-    onSetLocationName = () => {
-        this.props.dispatch(setLocationName('GuangZhou'));
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			value: '',
+		};
+
+	}
+
+	setLocation = (name) => {
+		this.props.dispatch(setLocationName(name));
+
+	};
+
+	onKeyPress = (e) => {
+		if (e.key === 'Enter') {
+			const { value } = this.state;
+			this.setLocation(value);
+			this.setState({ value: '' });
+		}
+	};
+
+    onInputChang = (e) => {
+	    this.setState({ value: e.target.value })
     };
 
     render() {
-
+	    const { value } = this.state;
 
         return (
           <div style={{ margin: 20 }}>
+	          <span>
+		          尝试使用input的value来更新store里面的locationName
+	          </span>
               location view:
               <p>
                   location name is {this.props.locationName}
               </p>
-
-              <button style={{ margin: 5 }} onClick={this.onSetLocationName}>
-                  set guangzhou
-              </button>
+	          <input
+		          value={value}
+		          className="location-input"
+		          onChange={this.onInputChang}
+		          onKeyPress={this.onKeyPress}
+	          />
           </div>
         )
     }

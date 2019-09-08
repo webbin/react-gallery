@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import FileList from "./fileManage/FileList";
-import logo from './logo.svg';
+
+import { Route, Switch, Redirect } from 'react-router-dom';
+
 import './App.css';
-import {songHistory} from './network/config';
-import ImageFileList from "./test/ImageFileList";
-import TimeView from "./test/TimeView";
-import LocationView from "./test/LocationView";
-import BingImageList from "./pages/bing/BingImageList";
+import MockBrowser from "./component/MockBrowser";
+import Main from "./pages/main/Main";
+import ImageListIndex from "./pages/imgs/ImageListIndex";
+import BasicExample from "./pages/basic/BasicExample";
 
 class App extends Component {
 
@@ -78,23 +78,23 @@ class App extends Component {
 	};
 
 	componentDidMount() {
-		setInterval(() => {
-			const date = new Date();
-			this.setState((preState) => {
-				const currentTime = date.getMilliseconds();
-				const delta = this.offWorkTime - currentTime;
-
-				const nextState = {
-					hour: date.getHours(),
-					minute: date.getMinutes(),
-					second: date.getSeconds(),
-				};
-				nextState.countDown = this.getCountDown();
-
-
-				return nextState;
-			});
-		}, 1000);
+		// setInterval(() => {
+		// 	const date = new Date();
+		// 	this.setState((preState) => {
+		// 		const currentTime = date.getMilliseconds();
+		// 		const delta = this.offWorkTime - currentTime;
+		//
+		// 		const nextState = {
+		// 			hour: date.getHours(),
+		// 			minute: date.getMinutes(),
+		// 			second: date.getSeconds(),
+		// 		};
+		// 		nextState.countDown = this.getCountDown();
+		//
+		//
+		// 		return nextState;
+		// 	});
+		// }, 1000);
 	}
 
 	renderCountDown = () => (
@@ -105,32 +105,38 @@ class App extends Component {
 	);
 
 
+	//<p
+	// 					className='time-hint-text'
+	// 					onClick={this.fetchMedium}
+	// 				>
+	// 					现在是 {this.state.year}年{this.state.month}月{this.state.day}日
+	// 					{hour}{this.state.minute}分{this.state.second}秒
+	// 				</p>
+	// 				<form ref={(ref) => this.form = ref } id="form">
+	// 					<input type="file" name="file" />
+	// 				</form>
+	//
+	// 				<button onClick={() => {
+	// 					const formData = new FormData();
+	// 					// formData.append('file', e.target.files[0]);
+	// 					console.log(formData);
+	// 				}}>
+	// 					print form data
+	// 				</button>
+	//
+	// 				<TimeView />
+	// 				<LocationView />
+	// 				<BingImageList />
+
 	render() {
-		const hour = this.state.hour > 12 ? `下午${this.state.hour - 12}时` : `上午${this.state.hour}时`;
 		return (
 			<div className='App'>
-				<p
-					className='time-hint-text'
-					onClick={this.fetchMedium}
-				>
-					现在是 {this.state.year}年{this.state.month}月{this.state.day}日
-					{hour}{this.state.minute}分{this.state.second}秒
-				</p>
-				<form ref={(ref) => this.form = ref } id="form">
-					<input type="file" name="file" />
-				</form>
-
-				<button onClick={() => {
-					const formData = new FormData();
-					// formData.append('file', e.target.files[0]);
-					console.log(formData);
-				}}>
-					print form data
-				</button>
-
-				<TimeView />
-				<LocationView />
-				<BingImageList />
+				<MockBrowser />
+				<Switch>
+					<Route path='/main' component={Main} />
+					<Route path='/img' component={ImageListIndex} />
+					<Redirect to='/main' />
+				</Switch>
 			</div>
 		);
 	}

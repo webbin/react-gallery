@@ -6,11 +6,15 @@ export default class BingImageTool {
 
 		this.index = 0;
 		this.size = pageSize;
+
+
+		this.host = '119.23.245.96';
+		// localhost
 	}
 
 
 	getUrl = (index, size = 10) => {
-		return `http://localhost:10052/imgList?index=${index}&size=${size}`;
+		return `http://${this.host}:10052/imgList?index=${index}&size=${size}`;
 	};
 
 	fetchImageList = async () => {

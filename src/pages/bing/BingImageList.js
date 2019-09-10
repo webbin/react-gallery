@@ -12,13 +12,24 @@ export default class BingImageList extends React.PureComponent {
 		this.state = {
 			list: [],
 		};
+
+		this.index = 0;
 	}
 
 	componentDidMount() {
+		this.getImageList();
+		this.addScrollListener();
+		this.listLengthScrollEnd = 0;
+	}
 
-		this.fetchTool.fetchImageList()
+	componentWillUnmount() {
+		this.removeScrollListener();
+	}
+
+	getImageList = () => {
+		this.fetchTool.fetchImageList(this.index)
 			.then((result) => {
-				console.log(' get bing image list = ', result);
+				// console.log(' get bing image list = ', result);
 				const { images } = result;
 
 				const list = [];
@@ -29,29 +40,80 @@ export default class BingImageList extends React.PureComponent {
 						url: `https://www.bing.com${url}`,
 					});
 				});
-				this.setState({ list });
-
+				console.log(' get bing image list = ', list);
+				this.pushList(list);
+				this.index += list.length;
 			})
 			.catch((err) => {
 				console.log(' get bing image list error = ', err);
 			});
+	};
 
-	}
+	pushList = (next) => {
+		if (!next || !next.length) return;
+		this.setState((state) => {
+			const { list } = state;
+			const l = list.concat(next);
+			return { list: l };
+		});
+	};
+
+	onScrollToEnd = () => {
+		console.log('container scroll to end ');
+		this.getImageList();
+	};
+
+	addScrollListener = () => {
+		window.addEventListener('scroll', this.onContainerScroll);
+	};
+
+	removeScrollListener = () => {
+		window.removeEventListener('scroll', this.onContainerScroll)
+	};
+
+	onContainerScroll = (event) => {
+		// console.log('container scroll ', event);
+		if (event.target && event.target.documentElement) {
+			const { scrollHeight, scrollTop, clientHeight } = event.target.documentElement;
+			// console.log('container scroll height = ', scrollHeight,
+			// 	', scroll top = ', scrollTop,
+			// 	' client height = ', clientHeight,
+			// );
+			if (scrollTop === 0) {
+				console.log('container scroll to top ');
+			} else if (scrollTop + clientHeight >= scrollHeight) {
+				// console.log('container scroll to bottom ');
+				if (this.listLengthScrollEnd !== this.state.list.length) {
+					this.onScrollToEnd();
+					this.listLengthScrollEnd = this.state.list.length;
+				}
+			}
+		}
+	};
+
+	onImageClick = (item, index) => () => {
+		const { history } = this.props;
+		history.push(`/imgDetail/bing/${index}`);
+	};
 
 	renderImageCell = (item, index) => {
 		if (!item) return null;
-		const { url } = item;
+		const { url, copyright } = item;
 		return (
-			<img alt={url} key={`${index}`} src={url} />
-		)
+			<div key={`${index}`} onClick={this.onImageClick(item, index)}>
+				<img className="image" alt={url} src={url} />
+				<p className="image_copyright">
+					{copyright}
+				</p>
+			</div>
+		);
 	};
 
 	renderGrid = () => {
 		const { list } = this.state;
 		return (
-			<div>
-				{this.renderImageCell(list[0], 0)}
-				{this.renderImageCell(list[1], 1)}
+			<div className="img_container" onScroll={this.onContainerScroll}>
+				{list.map(this.renderImageCell)}
 			</div>
 		)
 	};
@@ -62,8 +124,6 @@ export default class BingImageList extends React.PureComponent {
 				<a>
 					Bing pictures
 				</a>
-
-
 				{this.renderGrid()}
 			</div>
 		);

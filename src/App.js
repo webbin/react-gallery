@@ -7,6 +7,7 @@ import MockBrowser from "./component/MockBrowser";
 import Main from "./pages/main/Main";
 import ImageListIndex from "./pages/imgs/ImageListIndex";
 import BasicExample from "./pages/basic/BasicExample";
+import BingImageDetail from "./pages/bing/BingImageDetail";
 
 class App extends Component {
 
@@ -135,6 +136,7 @@ class App extends Component {
 				<Switch>
 					<Route path='/main' component={Main} />
 					<Route path='/img' component={ImageListIndex} />
+					<Route path='/imgDetail/:type/:url' component={BingImageDetail} />
 					<Redirect to='/main' />
 				</Switch>
 			</div>

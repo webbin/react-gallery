@@ -4,6 +4,7 @@ import {NavLink, Switch, Route, Redirect} from 'react-router-dom'
 import './main.css';
 import TimeView from "../../test/TimeView";
 import LocationView from "../../test/LocationView";
+import FileList from '../../fileManage/FileList';
 
 class Main extends React.PureComponent {
 	componentDidMount() {
@@ -36,6 +37,9 @@ const main = ({ match, history }) => {
 			<span className="main-title">
 				Main Page
 			</span>
+
+			<FileList />
+
 			<div
 				style={{
 					marginBottom: 30,
@@ -79,17 +83,6 @@ const main = ({ match, history }) => {
 				</NavLink>
 			</div>
 			<Switch>
-				{/*<Route*/}
-				{/*	path={`${match.path}`}*/}
-				{/*	exact*/}
-				{/*	render={() => {*/}
-				{/*		return (*/}
-				{/*			<div>*/}
-				{/*				Main*/}
-				{/*			</div>*/}
-				{/*		);*/}
-				{/*	}}*/}
-				{/*/>*/}
 				<Route exact path={`${match.path}/location`} component={LocationView}/>
 				<Route path={`${match.path}/time`} component={TimeView}/>
 				<Route

@@ -31,7 +31,9 @@ export default class ImageFileList extends React.PureComponent {
 					}
 				}
 				if (obj && obj instanceof Object) {
-					const { isFile } = obj;
+					const {
+						isFile
+					} = obj;
 					if (isFile) obj.used = true;
 				}
 			});
@@ -44,15 +46,27 @@ export default class ImageFileList extends React.PureComponent {
 			prefix += '--/';
 		}
 		if (data instanceof Object) {
-			const { isFile, used } = data;
+			const {
+				isFile,
+				used
+			} = data;
 			if (isFile) {
 				const key = `${layer}-${name}`;
 				const sty = used ? 'file_used' : 'file';
-					return (
-						<p className={sty} key={key}>
-							{prefix} file: {name}
-						</p>
-					);
+				return ( <
+					p className = {
+						sty
+					}
+					key = {
+						key
+					} > {
+						prefix
+					}
+					file: {
+						name
+					} <
+					/p>
+				);
 
 			} else {
 				const list = [];
@@ -62,11 +76,16 @@ export default class ImageFileList extends React.PureComponent {
 					const result = this.renderImageFileData(child, `/${pathName}`, layer + 1);
 					list.push(result);
 				});
-				return (
-					<div key={name} className="item">
-						{name}
-						{list}
-					</div>
+				return ( <
+					div key = {
+						name
+					}
+					className = "item" > {
+						name
+					} {
+						list
+					} <
+					/div>
 				);
 			}
 		}
@@ -75,11 +94,12 @@ export default class ImageFileList extends React.PureComponent {
 
 
 	render() {
-		return (
-			<div className="root">
-				this is image file tree
-				{this.renderImageFileData(imageData, '/images', 0)}
-			</div>
+		return ( <
+			div className = "root" >
+			this is image file tree {
+				this.renderImageFileData(imageData, '/images', 0)
+			} <
+			/div>
 		);
 	}
 }

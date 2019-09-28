@@ -16,8 +16,15 @@ export default class FileList extends React.Component {
 		};
 	}
 
-	renderItem = (item, index) => {
+	increasePrice = () => {
 
+		this.setState((state) => {
+			const { contextData: { price } } = state;
+			return { contextData: { price: price + 1 } };
+		})
+	};
+
+	renderItem = (item, index) => {
 		return (
 			<FileItem
 				key={index}
@@ -25,10 +32,21 @@ export default class FileList extends React.Component {
 		)
 	};
 
+	renderChangeButton = () => {
+		return (
+			<div>
+				<button onClick={this.increasePrice}>
+					add context value
+				</button>
+			</div>
+		)
+	};
+
 	render() {
 		return (
 			<FileContext.Provider value={this.state.contextData}>
 				<div style={styles.file_list}>
+					{this.renderChangeButton()}
 					this is file list
 					{this.files.map(this.renderItem)}
 				</div>

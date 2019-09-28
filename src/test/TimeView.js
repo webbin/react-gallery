@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { showTime, noTime, setTimeStep } from '../actions/timeActions';
+import TimeUtil from '../utils/TimeUtil';
 
 class TimeView extends React.PureComponent {
 
@@ -9,6 +10,9 @@ class TimeView extends React.PureComponent {
     	super(props);
 
     	this.step = 100;
+    }
+
+    componentDidMount() {
     }
 
     onShowTime = () => {

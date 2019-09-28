@@ -6,8 +6,8 @@ import './App.css';
 import MockBrowser from "./component/MockBrowser";
 import Main from "./pages/main/Main";
 import ImageListIndex from "./pages/imgs/ImageListIndex";
-import BasicExample from "./pages/basic/BasicExample";
 import BingImageDetail from "./pages/bing/BingImageDetail";
+import './test/HelloTom';
 
 class App extends Component {
 
@@ -28,10 +28,18 @@ class App extends Component {
 			minute: date.getMinutes(),
 			second: date.getSeconds(),
 			countDown: this.getCountDown(),
+
+			value: 100,
 		};
 
+		this.color = 'yellow';
 
+
+		this.sayColor();
+
+		this.sayColor = this.sayColor.bind(this);
 	}
+
 
 	fetchMedium = () => {
 		const options = {
@@ -50,7 +58,6 @@ class App extends Component {
 		fetch(url, options).then((result) => {
 			// console.log(result.text());
 			return result.text();
-
 		}).then((result) => {
 			console.log(result);
 		}).catch((err) => {
@@ -96,7 +103,53 @@ class App extends Component {
 		// 		return nextState;
 		// 	});
 		// }, 1000);
+
+		const obj = { a: 222, b: 23 };
+		const child = Object.create(obj);
+		console.log(child);
+		console.log(child.a);
+		console.log(child.prototype);
+		console.log('obj prototype = ', Object.getPrototypeOf(child));
+		console.log('obj child  prototype is same ? ', Object.getPrototypeOf(child) === obj);
+		console.log('Object prototype = ', Object.prototype);
+		console.log(child.__proto__);
+
+		// for (let ind in obj) {
+		// 	if (obj.hasOwnProperty(ind)) {
+		// 		console.log(' has own property ');
+		// 	}
+		// 	console.log('ind = ', ind);
+		// }
+
+		const f = this.foo.bind(this, 10, 20);
+		f(10000);
+
+		this.foo.call(null, 100, 200);
+		this.foo.apply(null, [110, 220]);
+
+
+		this.bar(10, 11);
+		this.sayColor();
 	}
+
+	foo = (x, y) => {
+		console.log('state of foo = ', this.state);
+		const result = x + y;
+		console.log('foo result = ', result);
+		return result;
+	};
+
+	bar = (x, y) => {
+		console.log('bar arguments ', arguments);
+		const result = this.foo.apply(null, arguments);
+		console.log('bar result = ', result);
+	};
+
+
+	sayColor() {
+		console.log(' color = ', this.color);
+		console.log(' say color arguments = ', arguments);
+	};
 
 	renderCountDown = () => (
 		<div>

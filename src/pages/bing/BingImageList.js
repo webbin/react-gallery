@@ -14,6 +14,9 @@ export default class BingImageList extends React.PureComponent {
 		};
 
 		this.index = 0;
+
+
+
 	}
 
 	componentDidMount() {
@@ -71,6 +74,19 @@ export default class BingImageList extends React.PureComponent {
 		window.removeEventListener('scroll', this.onContainerScroll)
 	};
 
+	generateScrollListener = () => {
+		let invokeTime = 0;
+		console.log(' generate scroll listener ======== ', invokeTime);
+
+		return (event) => {
+			console.log(' invoke scroll ======== ', invokeTime);
+			if (invokeTime % 30 === 0) {
+				this.onContainerScroll(event);
+			}
+			invokeTime += 1;
+		};
+	};
+
 	onContainerScroll = (event) => {
 		// console.log('container scroll ', event);
 		if (event.target && event.target.documentElement) {
@@ -112,7 +128,7 @@ export default class BingImageList extends React.PureComponent {
 	renderGrid = () => {
 		const { list } = this.state;
 		return (
-			<div className="img_container" onScroll={this.onContainerScroll}>
+			<div className="img_container" onScroll={this.generateScrollListener()}>
 				{list.map(this.renderImageCell)}
 			</div>
 		)

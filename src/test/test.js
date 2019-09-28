@@ -19,3 +19,7 @@ console.log(Object.keys(x));
 console.log(x.hasOwnProperty('size'));
 console.log('aged' in x);
 console.log(Object.getOwnPropertyNames(x));
+
+
+
+

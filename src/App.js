@@ -185,6 +185,9 @@ class App extends Component {
 	render() {
 		return (
 			<div className='App'>
+				<p>
+					this is comment!
+				</p>
 				<MockBrowser />
 				<Switch>
 					<Route path='/main' component={Main} />

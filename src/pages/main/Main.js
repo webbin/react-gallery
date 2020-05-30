@@ -37,66 +37,6 @@ const main = ({ match, history }) => {
 			<span className="main-title">
 				Main Page
 			</span>
-
-			<FileList />
-
-			<div
-				style={{
-					marginBottom: 30,
-				}}
-			>
-				<button
-					className="nav_button"
-					onClick={() => {
-						history.push('/img');
-					}}
-				>
-					Go To Image List
-				</button>
-				<button
-					className="nav_button"
-					onClick={() => {
-						history.push('/basic');
-					}}
-				>
-					Go To Basic
-				</button>
-			</div>
-			<div className="nav">
-				<NavLink
-					to="/main/location"
-					activeClassName="tab_active"
-				>
-					AppLocation
-				</NavLink>
-				<NavLink
-					to="/main/time"
-					activeClassName="tab_active"
-				>
-					AppTime
-				</NavLink>
-				<NavLink
-					activeClassName="tab_active"
-					to="/main/config"
-				>
-					AppConfig
-				</NavLink>
-			</div>
-			<Switch>
-				<Route exact path={`${match.path}/location`} component={LocationView}/>
-				<Route path={`${match.path}/time`} component={TimeView}/>
-				<Route
-					path='/main/config'
-					render={() => {
-						return (
-							<div>
-								Main Config
-							</div>
-						);
-					}}
-				/>
-				<Redirect to={`${match.path}/location`}/>
-			</Switch>
 		</div>
 	);
 };

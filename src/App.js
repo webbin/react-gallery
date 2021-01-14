@@ -189,7 +189,6 @@ class App extends Component {
 					this is comment!
 				</p>
 				<p>从github网页上修改</p>
-
 				<MockBrowser />
 				<Switch>
 					<Route path='/main' component={Main} />

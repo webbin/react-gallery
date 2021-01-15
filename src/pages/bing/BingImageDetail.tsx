@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
 type Props = {
   match: { params: { type: string; url: string } };
@@ -24,3 +24,5 @@ class BingImageDetail extends React.PureComponent<Props> {
     );
   }
 }
+
+export default BingImageDetail;

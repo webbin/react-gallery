@@ -1,15 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-import { createStore, applyMiddleware } from "redux";
-import reducers from "./reducers";
-import logger from "redux-logger";
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './reducers';
+import logger from 'redux-logger';
 
-import registerServiceWorker from "./registerServiceWorker";
+import registerServiceWorker from './registerServiceWorker';
 
 const enhancer = applyMiddleware(logger);
 const store = createStore(reducers, enhancer);
@@ -20,6 +20,6 @@ ReactDOM.render(
       <App />
     </BrowserRouter>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 registerServiceWorker();

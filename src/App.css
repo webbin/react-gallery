@@ -1,5 +1,14 @@
+html,
+body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
 .App {
-  text-align: center;
+  height: 100%;
 }
 
 .App-logo {
@@ -13,9 +22,50 @@
   padding: 20px;
   color: white;
 }
- * {
-     outline-width: 0;
- }
+
+
+.mock-browser {
+  background-color: #eee;
+  border-bottom: 1px solid #ccc;
+  padding: 0.3em;
+  font: 14pt Arial;
+  display: flex;
+}
+
+.path {
+  margin-left: 0.5em;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 0.5em;
+  flex: 1;
+  display: flex;
+  color: #999;
+  border-radius: 3px;
+}
+
+.mock-browser-input {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 1em;
+  padding: 0;
+  outline: none;
+  vertical-align: center;
+}
+.mock_browser_input:focus {
+  color: blue;
+}
+
+.outline {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+* {
+  outline-width: 0;
+}
 
 .App-title {
   font-size: 1.5em;
@@ -26,74 +76,41 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .time-hint-text {
-    font-size: 40px;
+  font-size: 40px;
 }
 
 .off-work-title {
-    font-size: 60px;
+  font-size: 60px;
 }
 
 .count-down-text {
-    font-size: 50px;
+  font-size: 50px;
 }
 
-div button {
-    /*background-color: cadetblue;*/
-    border-radius: 20px;
-    padding: 10px 20px 10px 20px;
-}
 div button:hover {
-    border-color: black;
+  border-color: black;
 }
-
 
 .location-input {
-    padding: 5px 10px 5px 10px;
-    border-radius: 6px;
-    border-width: 1px;
-    border-color: #444444;
-    outline-width: 0;
+  padding: 5px 10px 5px 10px;
+  border-radius: 6px;
+  border-width: 1px;
+  border-color: #444444;
+  outline-width: 0;
 }
 
-.mock-browser {
-    background-color: #eee;
-    border-bottom: 1px solid #ccc;
-    padding: 0.3em;
-    font: 14pt Arial;
-    display: flex;
-}
-
-.path {
-    margin-left: 0.5em;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 0.5em;
-    flex: 1;
-    display: flex;
-    color: #999;
-    border-radius: 3px;
-}
-
-.mock-browser-input {
-    width: 100%;
-    border: none;
-    background-color: transparent;
-    font-weight: bold;
-    font-size: 1em;
-    padding: 0;
-    outline: none;
-}
-.mock-browser-input:focus {
-    color: blue;
-}
 
 .main-title {
-    font-family: Monaco, cursive;
-    font-size: 2em;
-    color: black;
+  font-family: Monaco, cursive;
+  font-size: 2em;
+  color: black;
 }

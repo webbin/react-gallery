@@ -11,6 +11,33 @@ class Main extends React.PureComponent {
 		console.log(' props in main page ', this.props);
 	}
 
+	fetchMedium = () => {
+    const options = {
+      headers: {
+        // 'cache-control': 'no-cache',
+        Accept:
+          'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Encoding': ' gzip, deflate, br',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        Hose: 'www.baidu.com',
+      },
+      mode: 'no-cors',
+    };
+    const url = 'http://www.baidu.com';
+    const mendium = 'https://www.medium.com';
+    fetch(url, options)
+      .then((result) => {
+        // console.log(result.text());
+        return result.text();
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
 	goToImageListIndex = () => {
 		const {history} = this.props;
 		history.push('/imgs');
@@ -37,9 +64,6 @@ const main = ({ match, history }) => {
 			<span className="main-title">
 				Main Page
 			</span>
-
-			<FileList />
-
 			<div
 				style={{
 					marginBottom: 30,
@@ -62,7 +86,7 @@ const main = ({ match, history }) => {
 					Go To Basic
 				</button>
 			</div>
-			<div className="nav">
+			{/* <div className="nav">
 				<NavLink
 					to="/main/location"
 					activeClassName="tab_active"
@@ -96,7 +120,7 @@ const main = ({ match, history }) => {
 					}}
 				/>
 				<Redirect to={`${match.path}/location`}/>
-			</Switch>
+			</Switch> */}
 		</div>
 	);
 };

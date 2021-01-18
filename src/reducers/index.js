@@ -1,10 +1,13 @@
-import timeReducer from './timeReducer';
-import locationReducer from './locationReducer';
 import { combineReducers } from 'redux';
 
+import timeReducer from './timeReducer';
+import locationReducer from './locationReducer';
+import temperature from './temperature';
+
 const reducers = combineReducers({
-    timeReducer,
-    locationReducer,
+  timeReducer,
+  locationReducer,
+  temperature,
 });
 
 export default reducers;

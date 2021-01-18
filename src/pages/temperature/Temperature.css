@@ -1,0 +1,46 @@
+.upload-text-area {
+  display: block;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.temperature-container {
+  /* display: flex;
+  flex: 1 0 auto;
+  flex-direction: column; */
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.temperature-text-container {
+  padding: 50px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.temperature-text-span {
+  color: white;
+  font-size: 50px;
+  font-weight: 700;
+}
+
+.temperature-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  width: 200px;
+  height: 170px;
+
+  margin: 10px;
+  border-radius: 10px;
+}
+
+
+.upload-temperature-container {
+  width: 100%;
+}

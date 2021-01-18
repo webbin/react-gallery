@@ -1,0 +1,25 @@
+.root-container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.left-navigator {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  /* min-width: 140px; */
+  background-color: #87cefa;
+}
+
+.tab-active {
+  background-color: #4169E1;
+}
+
+.nav {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  margin: 0;
+}

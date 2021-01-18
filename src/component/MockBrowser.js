@@ -1,8 +1,9 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-class MockBrowser extends React.Component {
+// import './MockBrowser.css';
 
+class MockBrowser extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -12,11 +13,11 @@ class MockBrowser extends React.Component {
 		this.onKeyPress = this.onKeyPress.bind(this);
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.setState({ path: this.props.location.pathname })
 	}
 
-	componentWillReceiveProps(newProps) {
+	UNSAFE_componentWillReceiveProps(newProps) {
 		this.setState({ path: newProps.location.pathname })
 	}
 
@@ -32,6 +33,7 @@ class MockBrowser extends React.Component {
 
 	render() {
 		const { goForward, goBack } = this.props.history;
+		const { location: { pathname } } = this.props;
 
 		return (
 			<div className="mock-browser">
@@ -40,7 +42,7 @@ class MockBrowser extends React.Component {
 					<button className="outline" onClick={goForward}>▶</button>
 				</nav>
 				<div className="path">
-					<div>http://example.com</div>
+					<div>http://webbin.cn</div>
 					<div>
 						<input
 							className="mock-browser-input"

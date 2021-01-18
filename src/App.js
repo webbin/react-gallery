@@ -4,9 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 import './App.css';
 import MockBrowser from './component/MockBrowser';
-import Main from './pages/main/Main';
-import ImageListIndex from './pages/imgs/ImageListIndex';
-import BingImageDetail from './pages/bing/BingImageDetail';
+import Root from './root/Root';
 import './test/HelloTom';
 
 class App extends Component {
@@ -34,33 +32,6 @@ class App extends Component {
     this.color = 'yellow';
   }
 
-  fetchMedium = () => {
-    const options = {
-      headers: {
-        // 'cache-control': 'no-cache',
-        Accept:
-          'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-        'Accept-Encoding': ' gzip, deflate, br',
-        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
-        Hose: 'www.baidu.com',
-      },
-      mode: 'no-cors',
-    };
-    const url = 'http://www.baidu.com';
-    const mendium = 'https://www.medium.com';
-    fetch(url, options)
-      .then((result) => {
-        // console.log(result.text());
-        return result.text();
-      })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   getCountDown = () => {
     const date = new Date();
 
@@ -84,30 +55,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // setInterval(() => {
-    // 	const date = new Date();
-    // 	this.setState((preState) => {
-    // 		const currentTime = date.getMilliseconds();
-    // 		const delta = this.offWorkTime - currentTime;
-    //
-    // 		const nextState = {
-    // 			hour: date.getHours(),
-    // 			minute: date.getMinutes(),
-    // 			second: date.getSeconds(),
-    // 		};
-    // 		nextState.countDown = this.getCountDown();
-    //
-    //
-    // 		return nextState;
-    // 	});
-    // }, 1000);
-
-    // for (let ind in obj) {
-    // 	if (obj.hasOwnProperty(ind)) {
-    // 		console.log(' has own property ');
-    // 	}
-    // 	console.log('ind = ', ind);
-    // }
   }
 
   renderCountDown = () => (
@@ -120,39 +67,12 @@ class App extends Component {
     </div>
   );
 
-  //<p
-  // 					className='time-hint-text'
-  // 					onClick={this.fetchMedium}
-  // 				>
-  // 					现在是 {this.state.year}年{this.state.month}月{this.state.day}日
-  // 					{hour}{this.state.minute}分{this.state.second}秒
-  // 				</p>
-  // 				<form ref={(ref) => this.form = ref } id="form">
-  // 					<input type="file" name="file" />
-  // 				</form>
-  //
-  // 				<button onClick={() => {
-  // 					const formData = new FormData();
-  // 					// formData.append('file', e.target.files[0]);
-  // 					console.log(formData);
-  // 				}}>
-  // 					print form data
-  // 				</button>
-  //
-  // 				<TimeView />
-  // 				<LocationView />
-  // 				<BingImageList />
-
   render() {
     return (
       <div className='App'>
-        <p>this is comment!</p>
-        <p>从github网页上修改</p>
         <MockBrowser />
         <Switch>
-          <Route path='/main' component={Main} />
-          <Route path='/img' component={ImageListIndex} />
-          <Route path='/imgDetail/:type/:url' component={BingImageDetail} />
+          <Route path='/main' component={Root} />
           <Redirect to='/main' />
         </Switch>
       </div>

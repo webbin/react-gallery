@@ -1,69 +1,42 @@
-
 .tab_container {
-    display: flex;
+  display: flex;
 }
 
 .tab_title {
-    /*padding: 10px 20px 20px 10px;*/
-    background-color: #f1f1f1;
-    color: black;
-    text-align: center;
+  /*padding: 10px 20px 20px 10px;*/
+  background-color: #f1f1f1;
+  color: black;
+  text-align: center;
 }
 
 .tab_nav {
-    display: flex;
-    flex: 1;
-    margin-left: 2em;
-    border-bottom: 2px solid #555;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-self: flex-start;
+  display: flex;
+  flex: 1;
+  margin-left: 2em;
+  border-bottom: 2px solid #555;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-self: flex-start;
 }
 
 .tab_nav_link {
-    background-color: #f1f1f1;
-    text-align: center;
-    display: inline-block;
-    padding: 0.3em 1em;
-    color: #555;
-    text-decoration: none;
+  background-color: #f1f1f1;
+  text-align: center;
+  display: inline-block;
+  padding: 0.3em 1em;
+  color: #555;
+  text-decoration: none;
 }
 
-.nav {
-    margin: 5px;
-    border-bottom-width: 1px;
-    border-bottom-color: #444444;
-}
-.nav a {
-    background-color: #f1f1f1;
-    text-align: center;
-    display: inline-block;
-    padding: 0.3em 1em;
-    color: #555;
-    text-decoration: none;
-    margin: 5px 10px 5px 10px;
+
+.nav:hover {
+  background-color: #B0C4DE;
+  color: white;
 }
 
-.nav a:hover {
-    background-color: #105cb6;
-    color: white;
-}
-
-.tab_nav_link:hover {
-    background-color: #105cb6;
-    color: white;
-}
-
-.nav .tab_active {
-    background-color: #555;
-    color: #fff;
-}
 
 .tab_title:hover {
-    background-color: #105cb6;
-    color: white;
+  background-color: #105cb6;
+  color: white;
 }
 
-.nav_button {
-    margin: 5px;
-}

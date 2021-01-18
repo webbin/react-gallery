@@ -49,7 +49,7 @@ export default class ImageListIndex extends React.PureComponent {
 					Go To Main
 				</button>
 
-				<div className="nav">
+				{/* <div className="nav">
 					<NavLink to="/img/index" activeClassName="tab_active">
 						Index
 					</NavLink>
@@ -65,7 +65,7 @@ export default class ImageListIndex extends React.PureComponent {
 					<Route path={`${match.path}/title`} component={UserSubLayout} />
 					<Route path={`${match.path}/list`} component={BingImageList} />
 					<Redirect to={`${match.url}/index`} />
-				</Switch>
+				</Switch> */}
 			</div>
 		)
 	}

@@ -1,18 +1,16 @@
-module.exports = {
+export default {
   presets: [
-    [
-      '@babel/preset-react',
-      {
-        development: process.env.BABEL_ENV === 'development',
-      },
-    ],
+    '@babel/preset-env',
+    '@babel/preset-react',
+    '@babel/preset-typescript',
   ],
   plugins: [
     [
-      'react-css-modules',
+      '@babel/plugin-transform-runtime',
       {
-        option: 'value',
+        regenerator: true,
       },
     ],
+    ['@babel/plugin-proposal-class-properties'],
   ],
 };

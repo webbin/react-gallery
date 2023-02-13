@@ -1,0 +1,27 @@
+@import '../../constants/colors.module.scss';
+
+.ball {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  // background: #c00;
+  background-color: $red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -moz-transition: all 1s;
+  -webkit-transition: all 1s;
+  -ms-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+}
+
+.container {
+  position: relative;
+  flex: 1;
+}
+
+.root {
+  height: 100%;
+  width: 100%;
+}

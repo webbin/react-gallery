@@ -1,17 +1,19 @@
 {
-  "tabWidth": 2,
-  "useTabs": false,
-  "singleQuote": true,
-  "semi": true,
-  "proseWrap": "preserve",
-  "arrowParens": "always",
-  "bracketSpacing": true,
-  "disableLanguages": ["vue"],
-  "endOfLine": "auto",
-  "htmlWhitespaceSensitivity": "ignore",
-  "ignorePath": ".prettierignore",
-  "jsxBracketSameLine": false,
-  "jsxSingleQuote": true,
-  "requireConfig": false,
-  "trailingComma": "es5"
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "disableLanguages": [
+        "vue"
+    ],
+    "endOfLine": "auto",
+    "htmlWhitespaceSensitivity": "ignore",
+    "ignorePath": ".prettierignore",
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": false,
+    "requireConfig": false,
+    "trailingComma": "es5"
 }

@@ -1,0 +1,50 @@
+
+.root {
+  width: 100vw;
+  height: 100vh;
+}
+
+.top_cover {
+  width: 400px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: aqua;
+  height: 100px;
+}
+
+.banner_container {
+  width: 90%;
+  height: 200px;
+  overflow-x: scroll;
+  margin-bottom: 30px;
+}
+
+.banner {
+  transform: rotateZ(45deg) translateY(-30px);
+  transform-origin: 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: -82px;
+  top: 0;
+}
+
+.list_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.cell {
+  // width: 100%;
+  padding: 20px 30px;
+}
+
+.cell_text {
+  font-size: 20px;
+  color: black;
+}

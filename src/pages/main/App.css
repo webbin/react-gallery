@@ -1,0 +1,104 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: auto;
+}
+/* div {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+} */
+
+#root {
+  height: 100vh;
+  width: auto;
+}
+
+.orange_button {
+  background-color: #fa1;
+  font-size: 44px;
+  border-radius: 8px;
+  color: white;
+  width: 200px;
+  text-align: center;
+}
+
+.route-page-enter {
+  transform: translateX(100%);
+}
+
+.route-page-enter-active {
+  transform: translateX(0);
+  transition: transform 500ms;
+}
+
+.route-page-exit {
+  transform: translateX(0);
+}
+
+.route-page-exit-active {
+  transform: translateX(100%);
+  transition: transform 500ms;
+}
+
+.my-node-enter {
+  opacity: 1;
+  transform: translateX(100%);
+}
+.my-node-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: transform 300ms;
+}
+.my-node-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.my-node-exit-active {
+  opacity: 1;
+  transform: translateX(100%);
+  transition: transform 200ms;
+}
+
+.alert-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.alert-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.alert-exit {
+  opacity: 1;
+}
+.alert-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.dialog-enter {
+  opacity: 1;
+  position: absolute;
+  transform: translateX(100%);
+}
+.dialog-enter-active {
+  opacity: 1;
+  position: absolute;
+  transform: translateX(0);
+  transition: transform 300ms;
+}
+.dialog-exit {
+  opacity: 1;
+  position: absolute;
+  transform: translateX(0);
+}
+.dialog-exit-active {
+  opacity: 0;
+  position: absolute;
+  transform: translateX(100%);
+  transition: transform 200ms;
+}

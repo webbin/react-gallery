@@ -1,0 +1,7 @@
+@import '../../constants/colors.module.scss';
+
+.underlay-button {
+  &:active {
+    background-color: $buttonShadow;
+  }
+}

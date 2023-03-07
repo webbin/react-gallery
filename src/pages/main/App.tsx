@@ -11,29 +11,17 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
-  useLocation,
-  useHistory,
 } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { connect, ConnectedProps } from 'react-redux';
 
 import './App.css';
 import styles from './main.module.scss';
-import CanvasPage from '../canvas/CanvasPage';
 import HomePage from '../home/HomePage';
-import WindowPage from '../window/WindowPage';
-import AnimationPage from '../animation/AnimationPage';
-import ReactSpringPage from '../animation/ReactSpringPage';
-import TransformPage from '../transform/TransformPage';
-import ReactKeyPage from '../reactkey/ReactKey';
-import MasonryPage from '../masonry/MasonryPage';
 
 // import { AppDispatch } from './reducers/store';
 import { AppStore } from '../../reducers/store';
-import Routers from '../../constants/Routers';
 
-type Props = PropsFromRedux;
 
 function App() {
   // const history = useHistory();
@@ -73,27 +61,6 @@ function App() {
           <Switch>
             <Route exact path="/">
               <HomePage />
-            </Route>
-            <Route exact path={Routers.WindowPage}>
-              <WindowPage />
-            </Route>
-            <Route exact path={Routers.AnimationPage}>
-              <AnimationPage />
-            </Route>
-            <Route exact path={Routers.TransformPage}>
-              <TransformPage />
-            </Route>
-            <Route exact path={Routers.ReactKeyPage}>
-              <ReactKeyPage />
-            </Route>
-            <Route path="/canvas">
-              <CanvasPage />
-            </Route>
-            <Route path={Routers.MasonryPage}>
-              <MasonryPage />
-            </Route>
-            <Route path={Routers.ReactSpringPage}>
-              <ReactSpringPage />
             </Route>
           </Switch>
         </Router>

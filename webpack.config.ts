@@ -133,7 +133,10 @@ const config: Configuration = {
     historyApiFallback: true,
     compress: true,
     port: 9876,
-    host: 'localhost'
+    host: '0.0.0.0',
+  },
+  stats: {
+    warnings: false,
   },
 };
 

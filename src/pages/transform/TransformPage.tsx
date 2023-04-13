@@ -99,6 +99,7 @@ function CellItem(props: { data: ICell }) {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
       className={styles.cell}
       style={{
         backgroundColor: color,

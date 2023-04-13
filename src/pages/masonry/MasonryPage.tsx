@@ -60,6 +60,7 @@ function MasonryPage() {
       const array = Array.from(old);
       array.push(item);
       return array;
+      
     });
   }, []);
 
@@ -71,6 +72,7 @@ function MasonryPage() {
       <MasonryView
         style={{
           width: '100%',
+          overflowX: 'hidden'
         }}
         list={data}
         renderItem={(index) => {

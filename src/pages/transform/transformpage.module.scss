@@ -1,7 +1,9 @@
-
 .root {
+  // width: calc(100vw - 17px);
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .top_cover {
@@ -47,4 +49,6 @@
 .cell_text {
   font-size: 20px;
   color: black;
+  user-select: none;
+  cursor: grab;
 }

@@ -26,7 +26,14 @@ const renderButton = (
 ) => {
   return (
     <Button
-      style={{ marginTop: 20, display: 'block' }}
+      style={{
+        marginTop: 20,
+        display: 'block',
+        marginLeft: 30,
+        marginRight: 30,
+        width: 200,
+        height: 100,
+      }}
       variant="contained"
       onClick={onClick}
     >
@@ -42,7 +49,6 @@ const HomePage = () => {
     (store) => store.HomeData.homeStatus
   );
   const statusRef = useRef(status);
-  const [buttonVisible, setButtonVisible] = useState(true);
 
   // const listener = useCallback(() => {
   //   console.log('home status = ', status);
@@ -67,23 +73,13 @@ const HomePage = () => {
         overflowY: 'hidden',
       }}
     >
-      <div style={{ width: 100, height: 100 }}>
-        <div
-          style={{
-            position: 'absolute',
-            width: 50,
-            height: 50,
-            backgroundColor: 'rgba(0,0,0,.6)',
-            top: 10,
-            transform: buttonVisible ? 'translateX(100px)' : undefined,
-            transition: 'transform 500ms',
-          }}
-        ></div>
-      </div>
-      <div>Home Status = {status}</div>
-      <ListenerComponent />
-
-      <div style={{ marginTop: 40 }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+        }}
+      >
         {renderButton('Transform', () => {
           history.push(Routers.TransformPage);
         })}
@@ -96,38 +92,10 @@ const HomePage = () => {
         {renderButton('React Key', () => {
           history.push(Routers.ReactKeyPage);
         })}
-        {renderButton('Button Visible', () => {
-          setButtonVisible((old) => !old);
-        })}
         {renderButton('Masonry', () => {
-          history.push(Routers.MasonryPage)
+          history.push(Routers.MasonryPage);
         })}
       </div>
-      <CSSTransition
-        // in={buttonVisible}
-        id="css transition"
-        // classNames="dialog"
-        classNames={{
-          // enter: 'dialog-enter',
-          // enterActive: 'dialog-enter-active',
-          // exit: 'dialog-exit',
-          // exitActive: 'dialog-exit-active'
-          enter: styles.button_enter,
-          enterActive: styles.button_enter_active,
-          // enterDone: styles.button_enter_done,
-          exit: styles.button_exit,
-          exitActive: styles.button_exit_active,
-          exitDone: styles.button_exit_done,
-        }}
-        addEndListener={() => {
-          console.log('home page css transition end');
-        }}
-        timeout={1000}
-      >
-        <div className={styles.container}>
-          <div className="orange_button">Button</div>
-        </div>
-      </CSSTransition>
     </div>
   );
 };

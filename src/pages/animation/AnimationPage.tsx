@@ -7,7 +7,7 @@
  * @FilePath: /react-mobile/src/pages/animation/AnimationPage.tsx
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 
@@ -16,10 +16,24 @@ import Routers from '../../constants/Routers';
 
 export default function AnimationPage() {
   const history = useHistory();
+  const [buttonVisible, setButtonVisible] = useState(true);
 
   return (
     <div>
       AnimationPage
+      <div style={{ width: 100, height: 100 }}>
+        <div
+          style={{
+            position: 'absolute',
+            width: 50,
+            height: 50,
+            backgroundColor: 'rgba(0,0,0,.6)',
+            top: 10,
+            transform: buttonVisible ? 'translateX(100px)' : undefined,
+            transition: 'transform 500ms',
+          }}
+        ></div>
+      </div>
       <div
         style={{
           marginLeft: 30,

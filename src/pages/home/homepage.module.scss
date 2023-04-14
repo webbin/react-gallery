@@ -1,44 +1,10 @@
 
 $translate_duration: 1000ms;
 
-.title_nav {
-  font-size: 20px;
-  margin: 16px;
-}
-
 .container {
   // position: absolute;
   // bottom: 100px;
   width: 100vw;
   background-color: #666;
   height: 300px;
-}
-
-.button_enter {
-  transform: translateX(100%);
-}
-
-.button_enter_active {
-  transform: translateX(0);
-  transition: transform $translate_duration;
-}
-
-.button_enter_done {
-  opacity: 1;
-}
-
-.button_appear {
-  opacity: 1;
-}
-
-.button_exit {
-  opacity: 1;
-}
-.button_exit_active {
-  transform: translateX(100%);
-  transition: transform $translate_duration;
-}
-
-.button_exit_done {
-  opacity: 0;
 }

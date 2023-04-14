@@ -11,28 +11,31 @@ import React, { useEffect, useCallback, useRef, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { CSSTransition } from 'react-transition-group';
 
 import Routers from '../../constants/Routers';
 import styles from './homepage.module.scss';
 import './home.css';
 import { AppStore } from '../../reducers/store';
 import { addListener } from './ListenerComponent';
-import ListenerComponent from './ListenerComponent';
 
-const renderButton = (
-  title: string,
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
-) => {
+interface HomeBtnProps {
+  title: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+
+function HomeButton(props: HomeBtnProps) {
+  const { title, onClick } = props;
   return (
     <Button
       style={{
-        marginTop: 20,
         display: 'block',
-        marginLeft: 30,
-        marginRight: 30,
-        width: 200,
-        height: 100,
+        marginLeft: 10,
+        marginRight: 10,
+        width: 140,
+        height: 80,
+        marginTop: 5,
+        marginBottom: 10,
+        cursor: 'pointer',
       }}
       variant="contained"
       onClick={onClick}
@@ -40,7 +43,7 @@ const renderButton = (
       {title}
     </Button>
   );
-};
+}
 
 const HomePage = () => {
   const history = useHistory();
@@ -50,9 +53,6 @@ const HomePage = () => {
   );
   const statusRef = useRef(status);
 
-  // const listener = useCallback(() => {
-  //   console.log('home status = ', status);
-  // }, [status]);
   useEffect(() => {
     console.log('use effect -- status --');
     statusRef.current = status;
@@ -78,23 +78,35 @@ const HomePage = () => {
           display: 'flex',
           flexDirection: 'row',
           flexWrap: 'wrap',
+          marginTop: 20,
+          marginBottom: 30,
         }}
       >
-        {renderButton('Transform', () => {
-          history.push(Routers.TransformPage);
-        })}
-        {renderButton('Window', () => {
-          history.push(Routers.WindowPage);
-        })}
-        {renderButton('Animation', () => {
-          history.push(Routers.AnimationPage);
-        })}
-        {renderButton('React Key', () => {
-          history.push(Routers.ReactKeyPage);
-        })}
-        {renderButton('Masonry', () => {
-          history.push(Routers.MasonryPage);
-        })}
+        <HomeButton
+          title="Transform"
+          onClick={() => {
+            history.push(Routers.TransformPage);
+          }}
+        />
+        <HomeButton
+          title="Window"
+          onClick={() => {
+            history.push(Routers.WindowPage);
+          }}
+        />
+        <HomeButton
+          title="Animation"
+          onClick={() => {
+            history.push(Routers.AnimationPage);
+          }}
+        />
+
+        <HomeButton
+          title="Masonry"
+          onClick={() => {
+            history.push(Routers.MasonryPage);
+          }}
+        />
       </div>
     </div>
   );

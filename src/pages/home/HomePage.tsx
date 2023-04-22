@@ -83,6 +83,12 @@ const HomePage = () => {
         }}
       >
         <HomeButton
+          title="Station Page"
+          onClick={() => {
+            history.push(Routers.StationPage);
+          }}
+        />
+        <HomeButton
           title="Transform"
           onClick={() => {
             history.push(Routers.TransformPage);

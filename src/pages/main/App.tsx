@@ -28,6 +28,7 @@ import ReactSpringPage from '../animation/ReactSpringPage';
 import TransformPage from '../transform/TransformPage';
 import ReactKeyPage from '../reactkey/ReactKey';
 import MasonryPage from '../masonry/MasonryPage';
+import StationPage from '../stations/StationPage';
 
 // import { AppDispatch } from './reducers/store';
 import { AppStore } from '../../reducers/store';
@@ -94,6 +95,9 @@ function App() {
             </Route>
             <Route path={Routers.ReactSpringPage}>
               <ReactSpringPage />
+            </Route>
+            <Route path={Routers.StationPage}>
+              <StationPage />
             </Route>
           </Switch>
         </Router>

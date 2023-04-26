@@ -7,7 +7,7 @@
  * @FilePath: /base-react-webpack-ts/webpack.config.ts
  */
 import path from 'path';
-import { Configuration as WebpackConfiguration } from 'webpack';
+import { Configuration as WebpackConfiguration, Plugin } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -29,6 +29,7 @@ const config: Configuration = {
         use: {
           loader: 'babel-loader',
           options: {
+            cacheDirectory: true,
             presets: [
               '@babel/preset-env',
               '@babel/preset-react',
@@ -50,6 +51,15 @@ const config: Configuration = {
           },
         },
       },
+      // file-loader
+      //   {
+      //     test: /\.(png|jpg|gif)$/,
+      //     use: 'file-loader',
+      //   options: {
+      //     name: '[name].[ext]',
+      //     publicPath: './another-path/',
+      // },
+      // }
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/, /\.webp$/],
         use: [
@@ -68,7 +78,8 @@ const config: Configuration = {
           {
             loader: 'url-loader',
             options: {
-              limit: 10,
+              limit: 1024,
+              name: '[name].ico',
             },
           },
         ],
@@ -99,7 +110,8 @@ const config: Configuration = {
         exclude: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
+            // loader: 'style-loader',
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
@@ -114,13 +126,19 @@ const config: Configuration = {
       },
       {
         test: /\.css$/,
-        // exclude: /node_modules/,
-        include: (cssPath) => {
-          console.log('css file path: ', cssPath);
-          return true;
-        },
+        exclude: /node_modules/,
+        // include: (cssPath) => {
+        //   console.log('css file path: ', cssPath);
+        //   return true;
+        // },
         use: [
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // publicPath: '/public/path/to/',
+            },
+          },
+          // 'style-loader',
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -152,8 +170,13 @@ const config: Configuration = {
       filename: 'index.html',
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
-      title: 'Gallary',
-      inject: 'body',
+      // inject: 'body',
+      publicPath: '',
+    }),
+    // @ts-ignore
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
   ],
   resolve: {
@@ -162,7 +185,7 @@ const config: Configuration = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'index.bundle.js',
-    publicPath: '/',
+    publicPath: '',
   },
   devServer: {
     // contentBase: './temp',

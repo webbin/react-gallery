@@ -7,11 +7,11 @@
  * @FilePath: /react-mobile/src/pages/home/ListenerComponent.tsx
  */
 import React, { useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 
 import { Button } from '@mui/material';
 
-import { setHomeStatus } from '../../actions/HomeDataAction';
+import { useAppDispatch } from '../../reducers/hooks';
+import { setHomeStatus } from '../../reducers/actions';
 
 type Callback = (num: number) => void;
 
@@ -25,7 +25,7 @@ export const addListener = (callback: Callback) => {
 
 const ListenerComponent = () => {
   const count = useRef(0);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <div>

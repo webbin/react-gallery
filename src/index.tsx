@@ -12,7 +12,6 @@ import App from './pages/main/App';
 
 const Index = () => {
   return (
-    // @ts-ignore
     <Provider store={store}>
       <App />
     </Provider>

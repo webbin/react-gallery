@@ -8,12 +8,10 @@
  */
 import { combineReducers } from 'redux';
 
-import HomeData from './HomeData';
 import data from './data';
 
 const reducers = combineReducers({
   data,
-  HomeData,
 });
 
 export default reducers;

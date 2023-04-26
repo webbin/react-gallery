@@ -10,13 +10,13 @@ import React, { useEffect, useCallback, useRef, useState } from 'react';
 // import { Button, Drawer } from 'antd-mobile';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { Button } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
 
 import Routers from '../../constants/Routers';
 import styles from './homepage.module.scss';
 import './home.css';
 import { AppStore } from '../../reducers/store';
 import { addListener } from './ListenerComponent';
+import { useAppDispatch, useAppSelector } from '../../reducers/hooks';
 
 interface HomeBtnProps {
   title: string;
@@ -47,10 +47,8 @@ function HomeButton(props: HomeBtnProps) {
 
 const HomePage = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
-  const status = useSelector<AppStore, number>(
-    (store) => store.HomeData.homeStatus
-  );
+  const dispatch = useAppDispatch();
+  const status = useAppSelector((store) => store.homeData.homeStatus);
   const statusRef = useRef(status);
 
   useEffect(() => {

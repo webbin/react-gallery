@@ -17,10 +17,23 @@ interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
 
-// console.log(process.env);
+console.log('process env: ', process.env.NODE_ENV);
 
 const config: Configuration = {
-  entry: './src/index.tsx',
+  devtool: 'source-map',
+  entry: {
+    index: './src/index.tsx',
+    vendor: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'react-spring',
+      '@mui/material',
+      'antd-mobile',
+      'axios',
+      '@emotion/react',
+    ],
+  },
   module: {
     rules: [
       {
@@ -115,12 +128,16 @@ const config: Configuration = {
           },
           {
             loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
           },
           {
             loader: 'sass-loader',
-            // options: {
-            //   includePaths: ['src'],
-            // },
+            options: {
+              sourceMap: true,
+              //   includePaths: ['src'],
+            },
           },
         ],
       },
@@ -139,7 +156,12 @@ const config: Configuration = {
             },
           },
           // 'style-loader',
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
           {
             loader: 'postcss-loader',
             options: {
@@ -183,9 +205,37 @@ const config: Configuration = {
     extensions: ['.tsx', '.ts', '.js', '.css'],
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'index.bundle.js',
+    path: path.resolve(
+      __dirname,
+      'build',
+      process.env.ENV === 'production' ? 'prod' : 'dev'
+    ),
+    filename: '[name]@[hash].js',
     publicPath: '',
+  },
+  optimization: {
+    usedExports: true,
+    splitChunks: {
+      chunks: 'all',
+      minSize: 30000,
+      // maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      // automaticNameDelimiter: '~',
+      // automaticNameMaxLength: 30,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+        },
+        // default: {
+        //   minChunks: 2,
+        //   priority: -20,
+        //   reuseExistingChunk: true,
+        // },
+      },
+    },
   },
   devServer: {
     // contentBase: './temp',

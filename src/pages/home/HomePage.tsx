@@ -111,6 +111,12 @@ const HomePage = () => {
             history.push(Routers.MasonryPage);
           }}
         />
+        <HomeButton
+          title="Colors"
+          onClick={() => {
+            history.push(Routers.ColorPage);
+          }}
+        />
       </div>
     </div>
   );

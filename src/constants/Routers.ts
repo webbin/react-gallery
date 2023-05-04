@@ -17,6 +17,7 @@ const TransformPage = '/transform';
 const ReactKeyPage = '/reactkey';
 const MasonryPage = '/masonry';
 const StationPage = '/stations';
+const ColorPage = '/colors';
 
 export default {
   HomePage,
@@ -29,5 +30,6 @@ export default {
   ReactKeyPage,
   MasonryPage,
   ReactSpringPage,
-  StationPage
+  StationPage,
+  ColorPage,
 };

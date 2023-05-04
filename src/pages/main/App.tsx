@@ -29,6 +29,7 @@ import TransformPage from '../transform/TransformPage';
 import ReactKeyPage from '../reactkey/ReactKey';
 import MasonryPage from '../masonry/MasonryPage';
 import StationPage from '../stations/StationPage';
+import ColorPage from '../colors/ColorPage';
 
 // import { AppDispatch } from './reducers/store';
 import { AppStore } from '../../reducers/store';
@@ -72,9 +73,6 @@ function App() {
       >
         <Router>
           <Switch>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
             <Route exact path={Routers.WindowPage}>
               <WindowPage />
             </Route>
@@ -98,6 +96,12 @@ function App() {
             </Route>
             <Route path={Routers.StationPage}>
               <StationPage />
+            </Route>
+            <Route path={Routers.ColorPage}>
+              <ColorPage />
+            </Route>
+            <Route exact path="/">
+              <HomePage />
             </Route>
           </Switch>
         </Router>

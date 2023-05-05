@@ -39,6 +39,8 @@ function HomeButton(props: HomeBtnProps) {
       }}
       variant="contained"
       onClick={onClick}
+      // title={title}
+      // lowerCase
     >
       {title}
     </Button>

@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
+
+import { CSSTransition } from 'react-transition-group';
 
 import Colors from './Colors.json';
 import styles from './colorpage.module.scss';
 
 interface IColorItemProps {
   color: string;
+  onCopyDone: (x: number, y: number) => void;
 }
 
 const isDarkColor = (color: string) => {
@@ -16,21 +19,26 @@ const isDarkColor = (color: string) => {
 };
 
 const ColorItem = (props: IColorItemProps) => {
-  const { color } = props;
+  const { color, onCopyDone } = props;
   return (
     <div
       style={{
-        fontSize: 20,
         color: isDarkColor(color) ? 'white' : 'black',
         backgroundColor: color,
-        flex: 1,
-        textAlign: 'center',
-        marginTop: 5,
-        marginBottom: 5,
-        marginLeft: 10,
-        marginRight: 10,
-        paddingTop: 30,
-        paddingBottom: 30,
+      }}
+      className={styles.color_item}
+      onClick={(event) => {
+        console.log('color: ', color);
+        console.log('client: x ', event.clientX, ' y ', event.clientY);
+        onCopyDone(event.clientX, event.clientY);
+        // navigator.clipboard
+        //   .writeText(color)
+        //   .then(() => {
+        //     console.log('copy success');
+        //   })
+        //   .catch((err) => {
+        //     console.log('copy failed ', err);
+        //   });
       }}
     >
       {color}
@@ -38,11 +46,19 @@ const ColorItem = (props: IColorItemProps) => {
   );
 };
 
+interface IBubblePosition {
+  x: number;
+  y: number;
+}
+
 const ColorPage = () => {
   const [grid, setGrid] = useState<string[][]>([]);
+  const [bubblePosition, setBubblePosition] = useState<IBubblePosition>();
+  const [showBubble, setShowBubble] = useState(false);
+  const dismissTimer = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    console.log('home page did mount');
+    console.log('color page did mount');
     const colCount = 4;
     let row: string[] = [];
     const res: string[][] = [];
@@ -52,36 +68,79 @@ const ColorPage = () => {
       set.add(item);
       row.push(item);
       const index = set.size;
-      if ((index + 1) % colCount === 0 || colorIndex === Colors.length - 1) {
+      if (index % colCount === 0 || colorIndex === Colors.length - 1) {
         res.push(row);
         row = [];
       }
     });
     setGrid(res);
+
+    return () => {
+      if (dismissTimer.current) {
+        clearTimeout(dismissTimer.current);
+      }
+    };
   }, []);
 
   return (
     <div className={styles.container}>
-      <div>
-        {grid.map((row) => {
-          return (
-            <div
-              key={row[0]}
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              {row.map((item) => {
-                return <ColorItem color={item} key={item} />;
-              })}
-            </div>
-          );
-        })}
-      </div>
+      <CSSTransition
+        classNames={{
+          enter: styles.bubble_enter,
+          enterDone: styles.bubble_enter_done,
+          exit: styles.bubble_exit,
+          exitActive: styles.bubble_exit_active,
+        }}
+        in={showBubble}
+        unmountOnExit
+        timeout={300}
+        onExited={() => {
+          setBubblePosition(undefined);
+        }}
+      >
+        <div
+          style={{
+            left: bubblePosition?.x,
+            top: bubblePosition?.y,
+          }}
+          className={styles.copy_bubble}
+        >
+          复制成功
+        </div>
+      </CSSTransition>
+      {grid.map((row) => {
+        return (
+          <div
+            key={row[0]}
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              zIndex: 0,
+            }}
+          >
+            {row.map((item) => {
+              return (
+                <ColorItem
+                  onCopyDone={(x, y) => {
+                    if (dismissTimer.current) {
+                      clearTimeout(dismissTimer.current);
+                    }
+                    setBubblePosition({ x, y });
+                    setShowBubble(true);
+                    dismissTimer.current = setTimeout(() => {
+                      setShowBubble(false);
+                    }, 1000);
+                  }}
+                  color={item}
+                  key={item}
+                />
+              );
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 };
 
 export default ColorPage;
-

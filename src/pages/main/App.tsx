@@ -52,26 +52,35 @@ function App() {
   }, []);
 
   return (
-    <TransitionGroup id="transition-group" className={styles.transition_group}>
-      <CSSTransition
-        key={location.pathname}
-        classNames={{
-          appear: styles.page_appear,
-          appearActive: 'my-active-appear',
-          appearDone: 'my-done-appear',
-          enter: styles.page_enter,
-          enterActive: styles.page_enter_active,
-          enterDone: styles.page_enter_done,
-          exit: styles.page_exit,
-          exitActive: styles.page_exit_active,
-          exitDone: 'my-done-exit',
-        }}
-        addEndListener={() => {
-          console.log('css transition end ');
-        }}
-        timeout={1000}
+    <Router>
+      <TransitionGroup
+      // id="transition-group"
+      // className={styles.transition_group}
       >
-        <Router>
+        <CSSTransition
+          key={location.pathname}
+          classNames={{
+            appear: styles.page_appear,
+            // appearActive: 'my-active-appear',
+            // appearDone: 'my-done-appear',
+            enter: styles.page_enter,
+            enterActive: styles.page_enter_active,
+            enterDone: styles.page_enter_done,
+            // exit: styles.page_exit,
+            // exitActive: styles.page_exit_active,
+            // exitDone: 'my-done-exit',
+          }}
+          onEnter={() => {
+            console.log('on enter');
+          }}
+          onEntering={() => {
+            console.log('on entering');
+          }}
+          onEntered={() => {
+            console.log('on entered');
+          }}
+          timeout={1000}
+        >
           <Switch>
             <Route exact path={Routers.WindowPage}>
               <WindowPage />
@@ -104,9 +113,9 @@ function App() {
               <HomePage />
             </Route>
           </Switch>
-        </Router>
-      </CSSTransition>
-    </TransitionGroup>
+        </CSSTransition>
+      </TransitionGroup>
+    </Router>
   );
 }
 

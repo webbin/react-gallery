@@ -1,4 +1,50 @@
-
 .container {
-  padding: 30px 100px;
+  padding: 30px 10px;
+  // width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.color_item {
+  font-size: 20px;
+  flex: 1;
+  text-align: center;
+  margin: 10px;
+  padding: 30px 20px;
+  user-select: none;
+  transition: transform 300ms ease-in-out;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.color_item:hover {
+  transform: scale(1.2);
+}
+
+.bubble_enter {
+  opacity: 0;
+}
+
+.bubble_enter_done {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+}
+
+.bubble_exit {
+  opacity: 1;
+ }
+
+.bubble_exit_active {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+.copy_bubble {
+  position: absolute;
+  border-radius: 5px;
+  background-color: #0006;
+  color: white;
+  padding: 10px;
+  z-index: 1;
 }

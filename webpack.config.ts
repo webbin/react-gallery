@@ -12,12 +12,14 @@ import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-serv
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
 
 console.log('process env: ', process.env.NODE_ENV);
+const isProd = process.env.NODE_ENV === 'production';
 
 const config: Configuration = {
   devtool: 'source-map',
@@ -124,7 +126,7 @@ const config: Configuration = {
         use: [
           {
             // loader: 'style-loader',
-            loader: MiniCssExtractPlugin.loader,
+            loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader',
           },
           {
             loader: 'css-loader',
@@ -205,20 +207,19 @@ const config: Configuration = {
     extensions: ['.tsx', '.ts', '.js', '.css'],
   },
   output: {
-    path: path.resolve(
-      __dirname,
-      'build',
-      process.env.ENV === 'production' ? 'prod' : 'dev'
-    ),
-    filename: '[name]@[hash].js',
+    path: path.resolve(__dirname, 'build', isProd ? 'prod' : 'dev'),
+    filename: '[name]@[chunkhash].js',
     publicPath: '',
+    // chunkFilename: '[name]@[hash].js',
   },
   optimization: {
+    minimize: isProd,
+    minimizer: [new CssMinimizerPlugin()],
     usedExports: true,
     splitChunks: {
       chunks: 'all',
-      minSize: 30000,
-      // maxSize: 0,
+      // minSize: 0,
+      maxSize: 3000,
       minChunks: 1,
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
@@ -239,7 +240,9 @@ const config: Configuration = {
   },
   devServer: {
     // contentBase: './temp',
-    // historyApiFallback: true,
+    // 在访问任意不存在的路径时，Webpack Dev Server都会返回你的index.html，
+    // 然后你的React应用程序就可以接管路由并展示正确的组件。
+    historyApiFallback: true,
     compress: true,
     port: 9876,
     host: '0.0.0.0',
@@ -251,6 +254,7 @@ const config: Configuration = {
   stats: {
     warnings: false,
   },
+  mode: isProd ? 'production' : 'development',
 };
 
 export default config;

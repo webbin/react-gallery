@@ -18,6 +18,8 @@ const ReactKeyPage = '/reactkey';
 const MasonryPage = '/masonry';
 const StationPage = '/stations';
 const ColorPage = '/colors';
+const CanvasPage = '/canvas';
+const PieChartPage = '/piechart';
 
 export default {
   HomePage,
@@ -32,4 +34,6 @@ export default {
   ReactSpringPage,
   StationPage,
   ColorPage,
+  PieChartPage,
+  CanvasPage,
 };

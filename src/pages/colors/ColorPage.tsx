@@ -93,15 +93,20 @@ const ColorPage = () => {
         }}
         in={showBubble}
         unmountOnExit
-        timeout={300}
+        timeout={{
+          enter: 0,
+          exit: 300,
+        }}
         onExited={() => {
           setBubblePosition(undefined);
         }}
       >
         <div
           style={{
+            width: 80,
+            height: 30,
             left: bubblePosition?.x,
-            top: bubblePosition?.y,
+            top: bubblePosition ? bubblePosition.y - 30 : undefined,
           }}
           className={styles.copy_bubble}
         >

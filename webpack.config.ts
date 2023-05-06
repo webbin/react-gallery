@@ -122,15 +122,17 @@ const config: Configuration = {
       },
       {
         test: /\.s[ac]ss$/,
-        exclude: /\.css$/,
+        // exclude: /\.css$/,
         use: [
           {
             // loader: 'style-loader',
-            loader: isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
             options: {
+              modules: true,
+              localIdentName: '[name]__[local]__[hash:base64:5]',
               sourceMap: true,
             },
           },
@@ -145,7 +147,7 @@ const config: Configuration = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+        // exclude: /node_modules/,
         // include: (cssPath) => {
         //   console.log('css file path: ', cssPath);
         //   return true;
@@ -199,8 +201,10 @@ const config: Configuration = {
     }),
     // @ts-ignore
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: isProd ? '[name].[contenthash:8].css' : '[name].css',
+      chunkFilename: isProd
+        ? '[name].[contenthash:8].chunk.css'
+        : '[name].chunk.css',
     }),
   ],
   resolve: {
@@ -208,9 +212,9 @@ const config: Configuration = {
   },
   output: {
     path: path.resolve(__dirname, 'build', isProd ? 'prod' : 'dev'),
-    filename: '[name]@[chunkhash].js',
+    filename: isProd ? '[name]@[hash].js' : '[name].js',
     publicPath: '',
-    // chunkFilename: '[name]@[hash].js',
+    chunkFilename: isProd ? '[name]@[hash].chunk.js' : '[name].chunk.js',
   },
   optimization: {
     minimize: isProd,
@@ -219,23 +223,23 @@ const config: Configuration = {
     splitChunks: {
       chunks: 'all',
       // minSize: 0,
-      maxSize: 3000,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
+      maxSize: 1024000,
+      minChunks: 2,
+      // maxAsyncRequests: 5,
+      // maxInitialRequests: 3,
       // automaticNameDelimiter: '~',
       // automaticNameMaxLength: 30,
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-        },
-        // default: {
-        //   minChunks: 2,
-        //   priority: -20,
-        //   reuseExistingChunk: true,
-        // },
-      },
+      // cacheGroups: {
+      //   vendors: {
+      //     test: /[\\/]node_modules[\\/]/,
+      //     priority: -10,
+      //   },
+      //   default: {
+      //     minChunks: 2,
+      //     priority: -20,
+      //     reuseExistingChunk: true,
+      //   },
+      // },
     },
   },
   devServer: {

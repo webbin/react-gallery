@@ -25,6 +25,7 @@
     "echarts": "4.0.4",
     "echarts-for-react": "2.0.16",
     "install": "0.13.0",
+    "lottie-react": "^2.4.0",
     "md5": "2.3.0",
     "npm": "7.22.0",
     "object-hash": "2.2.0",

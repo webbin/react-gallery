@@ -30,6 +30,7 @@ import ReactKeyPage from '../reactkey/ReactKey';
 import MasonryPage from '../masonry/MasonryPage';
 import StationPage from '../stations/StationPage';
 import ColorPage from '../colors/ColorPage';
+import PieChartPage from '../chart/PieChartPage';
 
 // import { AppDispatch } from './reducers/store';
 import { AppStore } from '../../reducers/store';
@@ -94,7 +95,7 @@ function App() {
             <Route exact path={Routers.ReactKeyPage}>
               <ReactKeyPage />
             </Route>
-            <Route path="/canvas">
+            <Route path={Routers.CanvasPage}>
               <CanvasPage />
             </Route>
             <Route path={Routers.MasonryPage}>
@@ -108,6 +109,9 @@ function App() {
             </Route>
             <Route path={Routers.ColorPage}>
               <ColorPage />
+            </Route>
+            <Route path={Routers.PieChartPage}>
+              <PieChartPage />
             </Route>
             <Route exact path="/">
               <HomePage />

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dice Animation</title>
+    <style>
+      svg {
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g id="dice">
+        <rect x="20" y="20" width="60" height="60" fill="#fff" stroke="#000" />
+        <circle cx="40" cy="40" r="6" fill="#000" />
+        <circle cx="60" cy="40" r="6" fill="#000" />
+        <circle cx="40" cy="60" r="6" fill="#000" />
+        <circle cx="60" cy="60" r="6" fill="#000" />
+      </g>
+    </svg>
+
+    <script>
+      const dice = document.getElementById("dice");
+
+      // 骰子面的路径
+      const paths = [
+        "M30,30 L70,30 L70,70 L30,70 L30,30",
+        "M30,30 L50,50 L70,30 L70,70 L30,70 L30,30",
+        "M30,30 L70,30 L70,50 L30,50 L30,30",
+        "M30,30 L70,30 L70,50 L30,50 L30,70 L70,70 L70,30 L30,30",
+        "M30,30 L70,30 L70,70 L30,70 L30,50 L70,50 L70,30 L30,30",
+        "M30,30 L70,30 L70,70 L30,70 L30,50 L70,50 L70,30 L30,30",
+      ];
+
+      // 每个面的滚动时间间隔
+      const interval = 500;
+
+      let currentFace = 0;
+
+      // 切换骰子面函数
+      function changeFace() {
+        dice.setAttribute("d", paths[currentFace]);
+        currentFace = (currentFace + 1) % paths.length;
+      }
+
+      // 开始滚动动画
+      setInterval(changeFace, interval);
+    </script>
+  </body>
+</html>

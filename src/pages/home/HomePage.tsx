@@ -63,6 +63,9 @@ const HomePage = () => {
     addListener(() => {
       console.log(' status = ', statusRef.current);
     });
+    return () => {
+      console.log('Home page Unmount');
+    }
   }, []);
 
   return (
@@ -92,6 +95,12 @@ const HomePage = () => {
           title="Transform"
           onClick={() => {
             history.push(Routers.TransformPage);
+          }}
+        />
+        <HomeButton
+          title="Canvas"
+          onClick={() => {
+            history.push(Routers.CanvasPage);
           }}
         />
         <HomeButton

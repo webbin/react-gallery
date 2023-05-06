@@ -15,17 +15,16 @@ import styles from './window.module.scss';
 const WindowPage = () => {
   const widthRef = useRef(window.innerWidth);
   const [count, setCount] = useState(-1);
+  const [historyState, setHistoryState] = useState('')
 
   useEffect(() => {
     console.log('set count');
-    
     setCount(0);
   }, []);
   console.log('window page render', count);  
 
   return (
     <div>
-      
       <div
         style={{
           paddingTop: 50,

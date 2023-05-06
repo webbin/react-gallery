@@ -7,21 +7,43 @@
  * @FilePath: /react-mobile/src/pages/animation/AnimationPage.tsx
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom';
+import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
 import styles from './animation.module.scss';
 import Routers from '../../constants/Routers';
+import AnimationDice from '../../assets/dice_6.json';
 
 export default function AnimationPage() {
   const history = useHistory();
   const [buttonVisible, setButtonVisible] = useState(true);
+  const lottieRef = useRef<LottieRefCurrentProps | null>(null);
 
   return (
     <div>
-      AnimationPage
-      <div style={{ width: 100, height: 100 }}>
+      <Lottie
+        loop={false}
+        lottieRef={lottieRef}
+        style={{
+          width: 200,
+          height: 200,
+        }}
+        autoplay={false}
+        // width={200}
+        // height={200}
+        animationData={AnimationDice}
+        onClick={() => {
+          if (lottieRef.current) {
+            lottieRef.current.play();
+          }
+        }}
+        onComplete={() => {
+          //
+        }}
+      />
+      <div style={{ width: 100, height: 100, position: 'relative' }}>
         <div
           style={{
             position: 'absolute',

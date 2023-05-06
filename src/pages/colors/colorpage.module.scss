@@ -6,6 +6,15 @@
   // overflow: scroll;
 }
 
+.color_row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
 @media screen and (min-width: 768px) {
   .color_item_rect {
     margin: 10px;

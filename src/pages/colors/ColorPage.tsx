@@ -26,7 +26,7 @@ const ColorItem = (props: IColorItemProps) => {
         color: isDarkColor(color) ? 'white' : 'black',
         backgroundColor: color,
       }}
-      className={styles.color_item}
+      className={`${styles.color_item} ${styles.color_item_rect}`}
       onClick={(event) => {
         console.log('color: ', color);
         console.log('client: x ', event.clientX, ' y ', event.clientY);
@@ -41,7 +41,7 @@ const ColorItem = (props: IColorItemProps) => {
         //   });
       }}
     >
-      {color}
+      <span>{color}</span>
     </div>
   );
 };
@@ -117,11 +117,7 @@ const ColorPage = () => {
         return (
           <div
             key={row[0]}
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              zIndex: 0,
-            }}
+            className={styles.color_row}
           >
             {row.map((item) => {
               return (

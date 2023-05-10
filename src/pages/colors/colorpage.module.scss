@@ -50,6 +50,8 @@
   // margin: 10px;
   // padding: 30px 20px;
   user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
   transition: transform 300ms ease-in-out;
   cursor: pointer;
   justify-content: center;
@@ -58,6 +60,10 @@
 
 .color_item:hover {
   transform: scale(1.2);
+}
+
+.color_item:active {
+  
 }
 
 .bubble_enter {

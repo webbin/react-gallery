@@ -6,10 +6,20 @@
  * @Description: In User Settings Edit
  * @FilePath: /react-mobile/src/constants/Roters.ts
  */
+
+import CanvasPageComponent from '../pages/canvas/CanvasPage';
+import HomePageComponent from '../pages/home/HomePage';
+import WindowPageComponent from '../pages/window/WindowPage';
+import AnimationPageComponent from '../pages/animation/AnimationPage';
+import ReactSpringPageComponent from '../pages/animation/ReactSpringPage';
+import TransformPageComponent from '../pages/transform/TransformPage';
+import ReactKeyPageComponent from '../pages/reactkey/ReactKey';
+import MasonryPageComponent from '../pages/masonry/MasonryPage';
+import StationPageComponent from '../pages/stations/StationPage';
+import ColorPageComponent from '../pages/colors/ColorPage';
+import PieChartPageComponent from '../pages/chart/PieChartPage';
+
 const HomePage = '/home';
-const TestPage = '/test';
-const PlayingPage = '/playing';
-const GuessPage = '/guess';
 const WindowPage = '/window';
 const AnimationPage = '/animation';
 const ReactSpringPage = '/reactspring';
@@ -23,9 +33,6 @@ const PieChartPage = '/piechart';
 
 export default {
   HomePage,
-  TestPage,
-  PlayingPage,
-  GuessPage,
   WindowPage,
   AnimationPage,
   TransformPage,
@@ -37,3 +44,68 @@ export default {
   PieChartPage,
   CanvasPage,
 };
+
+const RouterList = [
+  {
+    path: HomePage,
+    component: HomePageComponent,
+    exact: true,
+  },
+  {
+    path: WindowPage,
+    component: WindowPageComponent,
+    exact: true,
+  },
+  {
+    path: AnimationPage,
+    component: AnimationPageComponent,
+    exact: true,
+  },
+  {
+    path: ReactSpringPage,
+    component: ReactSpringPageComponent,
+    exact: true,
+  },
+  {
+    path: TransformPage,
+    component: TransformPageComponent,
+    exact: true,
+  },
+  {
+    path: ReactKeyPage,
+    component: ReactKeyPageComponent,
+    exact: true,
+  },
+  {
+    path: MasonryPage,
+    component: MasonryPageComponent,
+    exact: true,
+  },
+  {
+    path: CanvasPage,
+    component: CanvasPageComponent,
+    exact: true,
+  },
+  {
+    path: StationPage,
+    component: StationPageComponent,
+    exact: true,
+  },
+  {
+    path: ColorPage,
+    component: ColorPageComponent,
+    exact: true,
+  },
+  {
+    path: PieChartPage,
+    component: PieChartPageComponent,
+    exact: true,
+  },
+  {
+    path: '/',
+    component: HomePageComponent,
+    exact: false,
+  },
+];
+
+export { RouterList };

@@ -12,9 +12,7 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import Routers from '../../constants/Routers';
-import styles from './homepage.module.scss';
 import './home.css';
-import { AppStore } from '../../reducers/store';
 import { addListener } from './ListenerComponent';
 import { useAppDispatch, useAppSelector } from '../../reducers/hooks';
 

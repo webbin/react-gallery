@@ -8,7 +8,7 @@
  */
 
 import CanvasPageComponent from '../pages/canvas/CanvasPage';
-import HomePageComponent from '../pages/home/HomePage';
+import HomePageComponent from '../pages/home/HomeIndexPage';
 import WindowPageComponent from '../pages/window/WindowPage';
 import AnimationPageComponent from '../pages/animation/AnimationPage';
 import ReactSpringPageComponent from '../pages/animation/ReactSpringPage';

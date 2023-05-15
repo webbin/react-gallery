@@ -70,7 +70,6 @@ const HomePage = () => {
     <div
       id="home page"
       style={{
-        height: '100vh',
         overflowY: 'hidden',
       }}
     >

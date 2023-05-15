@@ -12,10 +12,13 @@ import styles from './homepage.module.scss';
 import HomePage from './HomePage';
 import Home1Page from './home1/Home1Page';
 import Home2Page from './home2/Home2Page';
+import Routers from '../../constants/Routers';
 
 export default function HomeIndexPage(props: RouteComponentProps) {
   const { location, match, history } = props;
-  const RouteMatch = useRouteMatch()
+  const RouteMatch = useRouteMatch();
+
+  const currentPath = match.url === '/' ? Routers.HomePage : match.url;
 
   useEffect(() => {
     console.log(' location ', location);
@@ -27,46 +30,40 @@ export default function HomeIndexPage(props: RouteComponentProps) {
   }, []);
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div
         style={{
+          alignSelf: 'stretch',
           display: 'flex',
           flexDirection: 'row',
           flexWrap: 'wrap',
         }}
       >
         <Link
-          to={`${match.path}`}
+          to={Routers.HomePage}
           className={`${styles.tab} ${styles.tab_common}`}
         >
           Home
         </Link>
-        {/* <Link
-          to={`${match.path}/home1`}
-          className={`${styles.tab} ${styles.tab_common}`}
-        >
-          Home 1
-        </Link> */}
-        <div
-          className={`${styles.tab} ${styles.tab_common}`}
-          onClick={() => {
-            history.push('/home/home1');
-          }}
-        >
-          Home 1
-        </div>
         <Link
-          to={`${match.path}/home2`}
+          to={`${currentPath}/home1`}
+          className={`${styles.tab} ${styles.tab_common}`}
+        >
+          Home 1
+        </Link>
+        <Link
+          to={`${currentPath}/home2`}
           className={`${styles.tab} ${styles.tab_common}`}
         >
           Home 2
         </Link>
       </div>
       <Switch>
-        <Route path={`${match.path}`} component={HomePage} />
-        <Route path={`${match.path}/home1`} component={Home1Page} />
-        <Route path={`${match.path}/home2`} component={Home2Page} />
+        <Route exact path={`${Routers.HomePage}/home1`} component={Home1Page} />
+        <Route exact path={`${Routers.HomePage}/home2`} component={Home2Page} />
+        <Route exact path={`${match.url}`} component={HomePage} />
       </Switch>
+      
     </div>
   );
 }

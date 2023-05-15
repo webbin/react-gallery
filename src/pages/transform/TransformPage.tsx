@@ -9,42 +9,9 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 
-import styles from './transformpage.module.scss';
+import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
 
-function Present() {
-  return (
-    <div
-      style={{
-        width: 400,
-        height: 200,
-        backgroundColor: '#ccc',
-        // marginTop: 100,
-        // marginLeft: 100,
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      <div className={styles.top_cover}></div>
-      <div
-        className={styles.banner}
-        style={{
-          width: 282,
-          height: 30,
-          backgroundColor: '#fac',
-        }}
-      >
-        <span
-          style={{
-            color: 'white',
-            fontSize: 28,
-          }}
-        >
-          banner
-        </span>
-      </div>
-    </div>
-  );
-}
+import styles from './transformpage.module.scss';
 
 type ICell = {
   id: string;
@@ -113,8 +80,11 @@ function CellItem(props: { data: ICell }) {
 
 function TransformPage() {
   const [list, setList] = useState<ICell[]>([]);
+  const { url, path } = useRouteMatch();
 
   useEffect(() => {
+    console.log('Transform page did mount: ', url);
+    console.log('Transform page did mount: ', path);
     const now = Date.now();
     const res: ICell[] = [];
     for (let i = 0; i < 22; i += 1) {
@@ -128,13 +98,40 @@ function TransformPage() {
 
   return (
     <div className={styles.root}>
-      {/* <div className={styles.banner_container}>
-        <Present />
-      </div> */}
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to={`${url}/list`}>Transform List</Link>
+        </li>
+        <li>
+          <Link to={`${url}/component`}>Component</Link>
+        </li>
+        <li>
+          <Link to={`${url}/detail`}>Transform Detial</Link>
+        </li>
+      </ul>
+      <Switch>
+        <Route exact path={`${path}/list`}>
+          {list.map((value) => {
+            return <CellItem key={value.id} data={value} />;
+          })}
+        </Route>
+        <Route exact path={`${path}/detail`}>
+          <div>Transform Detail with Id</div>
+        </Route>
+        <Route exact path={`${path}/Component`}>
+          <div>Transform Component</div>
+        </Route>
+        <Route exact path={path}>
+          <h3>Please select a topic.</h3>
+        </Route>
 
-      {list.map((value) => {
-        return <CellItem key={value.id} data={value} />;
-      })}
+        <Route path={`${path}/:topicId`}>
+          <div>Topic Id</div>
+        </Route>
+      </Switch>
     </div>
   );
 }

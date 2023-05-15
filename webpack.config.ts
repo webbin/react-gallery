@@ -127,6 +127,9 @@ const config: Configuration = {
           {
             // loader: 'style-loader',
             loader: MiniCssExtractPlugin.loader,
+            options: {
+              // publicPath: '/',
+            }
           },
           {
             loader: 'css-loader',
@@ -197,7 +200,7 @@ const config: Configuration = {
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
       // inject: 'body',
-      publicPath: '',
+      publicPath: '/',
     }),
     // @ts-ignore
     new MiniCssExtractPlugin({
@@ -213,7 +216,7 @@ const config: Configuration = {
   output: {
     path: path.resolve(__dirname, 'build', isProd ? 'prod' : 'dev'),
     filename: isProd ? '[name]@[hash].js' : '[name].js',
-    publicPath: '',
+    // publicPath: '/',
     chunkFilename: isProd ? '[name]@[hash].chunk.js' : '[name].chunk.js',
   },
   optimization: {

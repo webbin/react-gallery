@@ -12,8 +12,8 @@ $translate_duration: 1000ms;
   .tab {
     max-width: 100px;
     height: 33px;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
+    // border-top-left-radius: 16px;
+    // border-top-right-radius: 16px;
   }
 }
 
@@ -21,8 +21,8 @@ $translate_duration: 1000ms;
   .tab {
     max-width: 180px;
     height: 36px;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
+    // border-top-left-radius: 16px;
+    // border-top-right-radius: 16px;
   }
 }
 
@@ -34,9 +34,9 @@ $translate_duration: 1000ms;
   // font-size: 1.5rem;
   font-size: 20px;
   // font-weight: 600;
-  // color: #fff;
+  color: #fff;
   // background-color: #3e4348;
-  color: black;
+  background-color: #383a3f;
   cursor: pointer;
   // transition: all $translate_duration ease-in-out;
   // border: 1px solid #fff;
@@ -45,6 +45,6 @@ $translate_duration: 1000ms;
   margin: 0;
   padding: 0 40px 10px 40px;
   &:hover {
-    transform: scaleX(1.1);
+    background-color: #566270;
   }
 }

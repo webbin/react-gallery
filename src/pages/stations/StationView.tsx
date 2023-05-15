@@ -17,6 +17,8 @@ export default function StationView(props: Props) {
   const timerRef = useRef<NodeJS.Timer>();
 
   const startTimer = useCallback(() => {
+    stopTimer();
+    setCount(0);
     timerRef.current = setInterval(() => {
       setCount((prev) => prev + speed);
     }, 1000);

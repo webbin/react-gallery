@@ -111,6 +111,7 @@ const CanvasPage = () => {
       />
 
       <Button
+        style={{ display: 'block' }}
         onClick={() => {
           if (contextRef.current) {
             const data = contextRef.current.canvas.toDataURL('image/jpeg', 1);

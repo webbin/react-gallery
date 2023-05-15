@@ -9,23 +9,61 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { Button } from '@mui/material';
+import { RouteComponentProps } from 'react-router-dom';
 
+import ValueView from './ValueView';
 import styles from './window.module.scss';
 
-const WindowPage = () => {
+type Props = RouteComponentProps & {};
+
+const WindowPage = (props: Props) => {
   const widthRef = useRef(window.innerWidth);
-  const [count, setCount] = useState(-1);
+  const [count, setCount] = useState(100);
+  const [historyState, setHistoryState] = useState('');
+  const [user, setUser] = useState({
+    name: 'Jake',
+    height: 199,
+  });
 
   useEffect(() => {
-    console.log('set count');
-    
-    setCount(0);
+    // console.log('set count');
+    // setCount((old) => old + 1);
   }, []);
-  console.log('window page render', count);  
+  console.log('window page render', count);
 
   return (
-    <div>
-      
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        paddingLeft: 30,
+        paddingRight: 30,
+      }}
+    >
+      <ValueView value={count} />
+      <Button
+        onClick={() => {
+          setCount((old) => {
+            console.log('on click , old: ', old);
+            return old + 100;
+          });
+        }}
+        variant="contained"
+      >
+        Count Add
+      </Button>
+
+      <span>User Name: {user.name}</span>
+      <span>User Height: {user.height}</span>
+      <Button
+        onClick={() => {
+          user.name = 'Mike';
+          setUser(user);
+        }}
+        variant="contained"
+      >
+        Chage User
+      </Button>
       <div
         style={{
           paddingTop: 50,

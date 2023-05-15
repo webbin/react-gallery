@@ -11,30 +11,18 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
-  useLocation,
-  useHistory,
 } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { connect, ConnectedProps } from 'react-redux';
+import { connect } from 'react-redux';
 
 import './App.css';
 import styles from './main.module.scss';
-import CanvasPage from '../canvas/CanvasPage';
-import HomePage from '../home/HomePage';
-import WindowPage from '../window/WindowPage';
-import AnimationPage from '../animation/AnimationPage';
-import ReactSpringPage from '../animation/ReactSpringPage';
-import TransformPage from '../transform/TransformPage';
-import ReactKeyPage from '../reactkey/ReactKey';
-import MasonryPage from '../masonry/MasonryPage';
-import StationPage from '../stations/StationPage';
 
 // import { AppDispatch } from './reducers/store';
 import { AppStore } from '../../reducers/store';
-import Routers from '../../constants/Routers';
+import { RouterList } from '../../constants/Routers';
 
-type Props = PropsFromRedux;
+// type Props = PropsFromRedux;
 
 function App() {
   // const history = useHistory();
@@ -51,58 +39,50 @@ function App() {
   }, []);
 
   return (
-    <TransitionGroup id="transition-group" className={styles.transition_group}>
-      <CSSTransition
-        key={location.pathname}
-        classNames={{
-          appear: styles.page_appear,
-          appearActive: 'my-active-appear',
-          appearDone: 'my-done-appear',
-          enter: styles.page_enter,
-          enterActive: styles.page_enter_active,
-          enterDone: styles.page_enter_done,
-          exit: styles.page_exit,
-          exitActive: styles.page_exit_active,
-          exitDone: 'my-done-exit',
-        }}
-        addEndListener={() => {
-          console.log('css transition end ');
-        }}
-        timeout={1000}
+    <Router>
+      <TransitionGroup
+      // id="transition-group"
+      // className={styles.transition_group}
       >
-        <Router>
+        <CSSTransition
+          key={location.pathname}
+          classNames={{
+            appear: styles.page_appear,
+            // appearActive: 'my-active-appear',
+            // appearDone: 'my-done-appear',
+            enter: styles.page_enter,
+            enterActive: styles.page_enter_active,
+            enterDone: styles.page_enter_done,
+            // exit: styles.page_exit,
+            // exitActive: styles.page_exit_active,
+            // exitDone: 'my-done-exit',
+          }}
+          onEnter={() => {
+            console.log('on enter');
+          }}
+          onEntering={() => {
+            console.log('on entering');
+          }}
+          onEntered={() => {
+            console.log('on entered');
+          }}
+          timeout={1000}
+        >
           <Switch>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-            <Route exact path={Routers.WindowPage}>
-              <WindowPage />
-            </Route>
-            <Route exact path={Routers.AnimationPage}>
-              <AnimationPage />
-            </Route>
-            <Route exact path={Routers.TransformPage}>
-              <TransformPage />
-            </Route>
-            <Route exact path={Routers.ReactKeyPage}>
-              <ReactKeyPage />
-            </Route>
-            <Route path="/canvas">
-              <CanvasPage />
-            </Route>
-            <Route path={Routers.MasonryPage}>
-              <MasonryPage />
-            </Route>
-            <Route path={Routers.ReactSpringPage}>
-              <ReactSpringPage />
-            </Route>
-            <Route path={Routers.StationPage}>
-              <StationPage />
-            </Route>
+            {RouterList.map((item) => {
+              return (
+                <Route
+                  key={item.path}
+                  component={item.component}
+                  exact={item.exact}
+                  path={item.path}
+                />
+              );
+            })}
           </Switch>
-        </Router>
-      </CSSTransition>
-    </TransitionGroup>
+        </CSSTransition>
+      </TransitionGroup>
+    </Router>
   );
 }
 
@@ -113,6 +93,6 @@ const mapStateToProps = (store: AppStore) => {
 const mapDispatchToProps = {};
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
-type PropsFromRedux = ConnectedProps<typeof connector>;
+// type PropsFromRedux = ConnectedProps<typeof connector>;
 
 export default connector(App);

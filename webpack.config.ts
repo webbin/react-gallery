@@ -12,13 +12,14 @@ import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-serv
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
 interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration;
 }
 
 console.log('process env: ', process.env.NODE_ENV);
-const isProduction = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production';
 
 const config: Configuration = {
   devtool: 'source-map',
@@ -121,15 +122,20 @@ const config: Configuration = {
       },
       {
         test: /\.s[ac]ss$/,
-        exclude: /\.css$/,
+        // exclude: /\.css$/,
         use: [
           {
             // loader: 'style-loader',
             loader: MiniCssExtractPlugin.loader,
+            options: {
+              // publicPath: '/',
+            }
           },
           {
             loader: 'css-loader',
             options: {
+              modules: true,
+              // localIdentName: '[name]__[local]__[hash:base64:5]',
               sourceMap: true,
             },
           },
@@ -144,7 +150,7 @@ const config: Configuration = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+        // exclude: /node_modules/,
         // include: (cssPath) => {
         //   console.log('css file path: ', cssPath);
         //   return true;
@@ -194,50 +200,56 @@ const config: Configuration = {
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
       // inject: 'body',
-      publicPath: '',
+      publicPath: '/',
     }),
     // @ts-ignore
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: isProd ? '[name].[contenthash:8].css' : '[name].css',
+      chunkFilename: isProd
+        ? '[name].[contenthash:8].chunk.css'
+        : '[name].chunk.css',
     }),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.css'],
   },
   output: {
-    path: path.resolve(__dirname, 'build', isProduction ? 'prod' : 'dev'),
-    filename: '[name]@[hash].js',
-    publicPath: '',
+    path: path.resolve(__dirname, 'build', isProd ? 'prod' : 'dev'),
+    filename: isProd ? '[name]@[hash].js' : '[name].js',
+    // publicPath: '/',
+    chunkFilename: isProd ? '[name]@[hash].chunk.js' : '[name].chunk.js',
   },
   optimization: {
-    minimize: isProduction,
+    minimize: isProd,
+    minimizer: [new CssMinimizerPlugin()],
     usedExports: true,
     splitChunks: {
       chunks: 'all',
-      minSize: 30000,
-      // maxSize: 0,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
+      // minSize: 0,
+      maxSize: 1024000,
+      minChunks: 2,
+      // maxAsyncRequests: 5,
+      // maxInitialRequests: 3,
       // automaticNameDelimiter: '~',
       // automaticNameMaxLength: 30,
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10,
-        },
-        // default: {
-        //   minChunks: 2,
-        //   priority: -20,
-        //   reuseExistingChunk: true,
-        // },
-      },
+      // cacheGroups: {
+      //   vendors: {
+      //     test: /[\\/]node_modules[\\/]/,
+      //     priority: -10,
+      //   },
+      //   default: {
+      //     minChunks: 2,
+      //     priority: -20,
+      //     reuseExistingChunk: true,
+      //   },
+      // },
     },
   },
   devServer: {
     // contentBase: './temp',
-    // historyApiFallback: true,
+    // 在访问任意不存在的路径时，Webpack Dev Server都会返回你的index.html，
+    // 然后你的React应用程序就可以接管路由并展示正确的组件。
+    historyApiFallback: true,
     compress: true,
     port: 9876,
     host: '0.0.0.0',
@@ -249,6 +261,7 @@ const config: Configuration = {
   stats: {
     warnings: false,
   },
+  mode: isProd ? 'production' : 'development',
 };
 
 export default config;

@@ -12,9 +12,7 @@ import { Route, Switch, useHistory } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import Routers from '../../constants/Routers';
-import styles from './homepage.module.scss';
 import './home.css';
-import { AppStore } from '../../reducers/store';
 import { addListener } from './ListenerComponent';
 import { useAppDispatch, useAppSelector } from '../../reducers/hooks';
 
@@ -39,6 +37,8 @@ function HomeButton(props: HomeBtnProps) {
       }}
       variant="contained"
       onClick={onClick}
+      // title={title}
+      // lowerCase
     >
       {title}
     </Button>
@@ -61,13 +61,15 @@ const HomePage = () => {
     addListener(() => {
       console.log(' status = ', statusRef.current);
     });
+    return () => {
+      console.log('Home page Unmount');
+    }
   }, []);
 
   return (
     <div
       id="home page"
       style={{
-        height: '100vh',
         overflowY: 'hidden',
       }}
     >
@@ -93,6 +95,12 @@ const HomePage = () => {
           }}
         />
         <HomeButton
+          title="Canvas"
+          onClick={() => {
+            history.push(Routers.CanvasPage);
+          }}
+        />
+        <HomeButton
           title="Window"
           onClick={() => {
             history.push(Routers.WindowPage);
@@ -109,6 +117,12 @@ const HomePage = () => {
           title="Masonry"
           onClick={() => {
             history.push(Routers.MasonryPage);
+          }}
+        />
+        <HomeButton
+          title="Colors"
+          onClick={() => {
+            history.push(Routers.ColorPage);
           }}
         />
       </div>

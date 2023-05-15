@@ -1,10 +1,50 @@
-
 $translate_duration: 1000ms;
 
 .container {
   // position: absolute;
   // bottom: 100px;
-  width: 100vw;
-  background-color: #666;
-  height: 300px;
+  // width: 100vw;
+  // background-color: #666;
+  // height: 300px;
+}
+
+@media screen and (max-width: 400px) {
+  .tab {
+    max-width: 100px;
+    height: 33px;
+    // border-top-left-radius: 16px;
+    // border-top-right-radius: 16px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .tab {
+    max-width: 180px;
+    height: 36px;
+    // border-top-left-radius: 16px;
+    // border-top-right-radius: 16px;
+  }
+}
+
+.tab_common {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  // font-size: 1.5rem;
+  font-size: 20px;
+  // font-weight: 600;
+  color: #fff;
+  // background-color: #3e4348;
+  background-color: #383a3f;
+  cursor: pointer;
+  // transition: all $translate_duration ease-in-out;
+  // border: 1px solid #fff;
+  // border-style: solid;
+  // margin: 0 10px;
+  margin: 0;
+  padding: 0 40px 10px 40px;
+  &:hover {
+    background-color: #566270;
+  }
 }

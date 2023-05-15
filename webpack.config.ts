@@ -18,6 +18,7 @@ interface Configuration extends WebpackConfiguration {
 }
 
 console.log('process env: ', process.env.NODE_ENV);
+const isProduction = process.env.NODE_ENV === 'production';
 
 const config: Configuration = {
   devtool: 'source-map',
@@ -205,15 +206,12 @@ const config: Configuration = {
     extensions: ['.tsx', '.ts', '.js', '.css'],
   },
   output: {
-    path: path.resolve(
-      __dirname,
-      'build',
-      process.env.ENV === 'production' ? 'prod' : 'dev'
-    ),
+    path: path.resolve(__dirname, 'build', isProduction ? 'prod' : 'dev'),
     filename: '[name]@[hash].js',
     publicPath: '',
   },
   optimization: {
+    minimize: isProduction,
     usedExports: true,
     splitChunks: {
       chunks: 'all',

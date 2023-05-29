@@ -13,12 +13,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
 import homeData from './homedatareducer';
+import windowData from './windowreducer';
 
 // const enhancer = applyMiddleware(thunk, logger);
 // const store = createStore(reducers, enhancer);
 const store = configureStore({
   reducer: {
     homeData,
+    windowData, 
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(thunk).concat(logger),

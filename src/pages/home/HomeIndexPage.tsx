@@ -31,39 +31,33 @@ export default function HomeIndexPage(props: RouteComponentProps) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div
-        style={{
-          alignSelf: 'stretch',
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-        }}
-      >
+      <div className={styles.tab_container}>
         <Link
           to={Routers.HomePage}
           className={`${styles.tab} ${styles.tab_common}`}
         >
           Home
         </Link>
-        <Link
-          to={`${currentPath}/home1`}
-          className={`${styles.tab} ${styles.tab_common}`}
-        >
-          Home 1
-        </Link>
-        <Link
-          to={`${currentPath}/home2`}
-          className={`${styles.tab} ${styles.tab_common}`}
-        >
-          Home 2
-        </Link>
+        <div className={styles.tab_container_right}>
+          <Link
+            to={`${currentPath}/home1`}
+            className={`${styles.tab} ${styles.tab_common}`}
+          >
+            Getting Start
+          </Link>
+          <Link
+            to={`${currentPath}/home2`}
+            className={`${styles.tab} ${styles.tab_common}`}
+          >
+            Tutorial
+          </Link>
+        </div>
       </div>
       <Switch>
         <Route exact path={`${Routers.HomePage}/home1`} component={Home1Page} />
         <Route exact path={`${Routers.HomePage}/home2`} component={Home2Page} />
         <Route exact path={`${match.url}`} component={HomePage} />
       </Switch>
-      
     </div>
   );
 }

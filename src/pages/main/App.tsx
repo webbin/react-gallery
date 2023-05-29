@@ -7,34 +7,37 @@
  * @FilePath: /base-react-webpack-ts/src/App.tsx
  */
 import React, { useEffect } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { connect } from 'react-redux';
 
 import './App.css';
 import styles from './main.module.scss';
 
-// import { AppDispatch } from './reducers/store';
-import { AppStore } from '../../reducers/store';
 import { RouterList } from '../../constants/Routers';
+import { notifyWindowResize } from '../../reducers/actions';
+import { useAppDispatch } from '../../reducers/hooks';
 
 // type Props = PropsFromRedux;
 
 function App() {
   // const history = useHistory();
   // const location = useLocation();
+  const dispath = useAppDispatch();
+
   useEffect(() => {
     // window.history
     console.log('location ', location);
     window.addEventListener('hashchange', (e) => {
       console.log('has change', e);
     });
+    window.addEventListener('resize', () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      console.log(' window resize, width: ', width, ', height: ', height);
+      dispath(notifyWindowResize(width));
+    });
     return () => {
-      // second
+      console.log('App unmount');
     };
   }, []);
 
@@ -86,13 +89,4 @@ function App() {
   );
 }
 
-const mapStateToProps = (store: AppStore) => {
-  return {};
-};
-
-const mapDispatchToProps = {};
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-// type PropsFromRedux = ConnectedProps<typeof connector>;
-
-export default connector(App);
+export default App;

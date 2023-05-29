@@ -1,0 +1,15 @@
+.root {
+  height: 100%;
+  width: 300px;
+  background-color: #2e294e;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: transform 300ms linear;
+}
+
+.title {
+  font-size: 24px;
+  color: #fff;
+  margin: 20px 30px;
+}

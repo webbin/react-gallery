@@ -83,6 +83,7 @@ const config: Configuration = {
             options: {
               limit: 8192,
               esModule: false,
+              outputPath: 'imgs/',
             },
           },
         ],
@@ -99,26 +100,55 @@ const config: Configuration = {
           },
         ],
       },
+      {
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+            },
+          },
+        ],
+      },
       //html模板加载器，可以处理引用的静态资源，默认配置参数attrs=img:src，处理图片的src引用的资源
       {
         test: /\.html$/,
-        loader: 'html-loader',
-        options: {
-          attributes: {
-            list: [
-              //  'img:src',
-              { tag: 'img', attribute: 'src', type: 'src' },
-              //'link:href',
-              {
-                tag: 'link',
-                // Attribute name
-                attribute: 'href',
-                // Type of processing, can be `src` or `scrset`
-                type: 'src',
-              },
-            ],
+        exclude: /index\.html/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'assets/[name].[ext]',
+            },
           },
-        },
+          {
+            loader: 'extract-loader',
+            options: {
+              publicPath: '../',
+            },
+          },
+          {
+            loader: 'html-loader',
+            options: {
+              attributes: {
+                list: [
+                  //  'img:src',
+                  // { tag: 'img', attribute: 'src', type: 'src' },
+                  //'link:href',
+                  {
+                    tag: 'link',
+                    // Attribute name
+                    attribute: 'href',
+                    // Type of processing, can be `src` or `scrset`
+                    type: 'src',
+                  },
+                ],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.s[ac]ss$/,
@@ -129,7 +159,7 @@ const config: Configuration = {
             loader: MiniCssExtractPlugin.loader,
             options: {
               // publicPath: '/',
-            }
+            },
           },
           {
             loader: 'css-loader',

@@ -1,0 +1,21 @@
+
+.root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.frame {
+  overflow: auto;
+  border-width: 0;
+  flex: 1;
+}
+.frame::-webkit-scrollbar {
+  width: 10px;
+}
+
+.selec {
+  background-color: #000;
+  color: #eee;
+}

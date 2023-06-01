@@ -1,4 +1,10 @@
 $translate_duration: 1000ms;
+$tab_container_bg: #383a3f;
+$tab_height: 42px;
+
+:export {
+  tab_height:$tab_height
+}
 
 .container {
   // position: absolute;
@@ -8,21 +14,41 @@ $translate_duration: 1000ms;
   // height: 300px;
 }
 
+.tab_container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: $tab_height;
+  background-color: $tab_container_bg;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.tab_container a {
+  text-decoration-line: none;
+}
+
+.tab_container_right {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-end;
+  height: $tab_height;
+  // padding: 0px 12px;
+  flex: 1;
+}
+
 @media screen and (max-width: 400px) {
   .tab {
     max-width: 100px;
-    height: 33px;
-    // border-top-left-radius: 16px;
-    // border-top-right-radius: 16px;
   }
 }
 
 @media screen and (max-width: 900px) {
   .tab {
     max-width: 180px;
-    height: 36px;
-    // border-top-left-radius: 16px;
-    // border-top-right-radius: 16px;
   }
 }
 
@@ -35,16 +61,70 @@ $translate_duration: 1000ms;
   font-size: 20px;
   // font-weight: 600;
   color: #fff;
-  // background-color: #3e4348;
-  background-color: #383a3f;
   cursor: pointer;
   // transition: all $translate_duration ease-in-out;
   // border: 1px solid #fff;
   // border-style: solid;
   // margin: 0 10px;
   margin: 0;
-  padding: 0 40px 10px 40px;
+  text-align: center;
+  padding: 0 20px 0px 20px;
+  line-height: $tab_height;
   &:hover {
     background-color: #566270;
+    color: #30a9de;
   }
+}
+
+.font_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.font_container p {
+  background-color: #ccc;
+  margin: 0;
+}
+
+.font_p {
+  font-family: 'Roboto-Regular';
+}
+
+.font_menlo {
+  font-family: 'Menlo-Regular';
+  font-weight: 500;
+}
+
+.home_text_content {
+  margin-top: $tab_height;
+  padding: 0px 30px;
+}
+
+.home_text_content a {
+  font-weight: 600;
+  font-family: 'Menlo-Regular';
+}
+
+.home_text_content p {
+  margin-block-start: 16px;
+  margin-block-end: 16px;
+}
+
+.home_text_content li {
+  margin-block-start: 8px;
+  margin-block-end: 8px;
+  font-size: 20px;
+}
+
+.home_title {
+  font-family: 'Roboto-Regular';
+  font-size: 40px;
+  font-weight: 800;
+}
+
+.home_title_v2 {
+  font-family: 'Roboto-Regular';
+  font-size: 30px;
+  font-weight: 600;
 }

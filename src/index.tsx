@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 
 import store from './reducers/store';
 import App from './pages/main/App';
+import './GlobalHandler';
 
 const Index = () => {
   return (

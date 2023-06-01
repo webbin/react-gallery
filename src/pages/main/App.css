@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: url('../../fonts/Roboto-Regular.ttf') format('truetype');
+  /* 其他字体属性设置 */
+}
+
+@font-face {
+  font-family: 'Menlo-Regular';
+  src: url('../../fonts/Menlo-Regular-1.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'HanYiZhengYuan75';
+  src: url('../../fonts/汉仪正圆-75.ttf') format('truetype');
+}
+
 html,
 body {
   margin: 0;

@@ -2,6 +2,10 @@ $translate_duration: 1000ms;
 $tab_container_bg: #383a3f;
 $tab_height: 42px;
 
+:export {
+  tab_height:$tab_height
+}
+
 .container {
   // position: absolute;
   // bottom: 100px;
@@ -16,6 +20,10 @@ $tab_height: 42px;
   align-items: stretch;
   height: $tab_height;
   background-color: $tab_container_bg;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .tab_container a {
@@ -89,6 +97,7 @@ $tab_height: 42px;
 }
 
 .home_text_content {
+  margin-top: $tab_height;
   padding: 0px 30px;
 }
 

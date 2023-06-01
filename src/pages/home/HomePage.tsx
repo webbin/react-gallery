@@ -147,6 +147,9 @@ const HomePage = () => {
           <li>
             <Link to={Routers.ColorPage}>Colors</Link>
           </li>
+          <li>
+            <Link to={Routers.AlgorithmPage}>Algorithm</Link>
+          </li>
         </ul>
       </div>
     </div>

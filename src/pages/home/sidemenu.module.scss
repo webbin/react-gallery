@@ -4,8 +4,20 @@
   background-color: #2e294e;
   position: fixed;
   left: 0;
-  top: 0;
-  transition: transform 300ms linear;
+  top: 42px;
+  transition: transform 200ms linear;
+}
+
+.title_row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title_row span {
+  color: white;
+  margin-right: 30px;
 }
 
 .title {

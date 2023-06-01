@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
+import { Link, useHistory } from 'react-router-dom';
 
 import styles from './sidemenu.module.scss';
+import homeStyles from './homepage.module.scss';
+import Routers from '../../constants/Routers';
 
 interface Props {
   visible: boolean;
@@ -15,6 +18,8 @@ interface AnimationProps {
 
 export default function SideMenuView(prop: Props) {
   const { visible, onRequestClose } = prop;
+  const history = useHistory();
+
   const [ts, setTs] = useState('-100%');
   const style = useSpring<AnimationProps>({
     transform: `translateX(${ts})`,
@@ -27,12 +32,40 @@ export default function SideMenuView(prop: Props) {
     }
   }, [visible]);
 
+  useEffect(() => {
+    console.log('path name from side menu : ', history.location.pathname);
+  }, []);
+
   return (
     <animated.div style={style} className={styles.root}>
-      <p className={styles.title}>Side Menu</p>
-      <span style={{ display: 'inline-block' }} onClick={onRequestClose}>
-        close
-      </span>
+      <div className={styles.title_row}>
+        <p className={styles.title}>Side Menu</p>
+        <span onClick={onRequestClose}>close</span>
+      </div>
+      <div
+        onClick={() => {
+          history.push(`${Routers.HomePage}/home1`);
+          onRequestClose();
+        }}
+        style={{
+          alignItems: 'flex-start',
+        }}
+        className={`${homeStyles.tab} ${homeStyles.tab_common}`}
+      >
+        Getting Start
+      </div>
+      <div
+        onClick={() => {
+          history.push(`${Routers.HomePage}/home2`);
+          onRequestClose();
+        }}
+        style={{
+          alignItems: 'flex-start',
+        }}
+        className={`${homeStyles.tab} ${homeStyles.tab_common}`}
+      >
+        Tutorial
+      </div>
     </animated.div>
   );
 }

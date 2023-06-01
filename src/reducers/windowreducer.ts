@@ -1,4 +1,4 @@
-import { createReducer, createAction } from '@reduxjs/toolkit';
+import { createReducer, createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 import { IWindow, IWindowType } from './types';
 

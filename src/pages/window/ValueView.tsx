@@ -42,7 +42,6 @@ export default function ValueView(props: Props) {
   return (
     <div>
       <p>Value View</p>
-      {prompt()}
       <span>Value: {value}</span>
       <br></br>
       <span>Even: {isEven}</span>

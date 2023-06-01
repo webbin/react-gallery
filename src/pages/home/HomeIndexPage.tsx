@@ -35,6 +35,7 @@ export default function HomeIndexPage(props: RouteComponentProps) {
   const isSmallWindow = useAppSelector(
     (store) => store.windowData.type === 'Small'
   );
+  console.log('is small window ? ', isSmallWindow);
 
   return (
     <div>
@@ -47,15 +48,17 @@ export default function HomeIndexPage(props: RouteComponentProps) {
         />
       ) : null}
       <div className={styles.tab_container}>
-        <div
-          style={{ userSelect: 'none' }}
-          className={`${styles.tab} ${styles.tab_common}`}
-          onClick={() => {
-            setMenuVisible((old) => !old);
-          }}
-        >
-          Menu
-        </div>
+        {isSmallWindow ? (
+          <div
+            style={{ userSelect: 'none' }}
+            className={`${styles.tab} ${styles.tab_common}`}
+            onClick={() => {
+              setMenuVisible((old) => !old);
+            }}
+          >
+            Menu
+          </div>
+        ) : null}
         <Link
           to={Routers.HomePage}
           className={`${styles.tab} ${styles.tab_common}`}
@@ -63,18 +66,22 @@ export default function HomeIndexPage(props: RouteComponentProps) {
           Home
         </Link>
         <div style={{ flex: 1 }}></div>
-        <Link
-          to={`${currentPath}/home1`}
-          className={`${styles.tab} ${styles.tab_common}`}
-        >
-          Getting Start
-        </Link>
-        <Link
-          to={`${currentPath}/home2`}
-          className={`${styles.tab} ${styles.tab_common}`}
-        >
-          Tutorial
-        </Link>
+        {!isSmallWindow ? (
+          <Link
+            to={`${currentPath}/home1`}
+            className={`${styles.tab} ${styles.tab_common}`}
+          >
+            Getting Start
+          </Link>
+        ) : null}
+        {!isSmallWindow ? (
+          <Link
+            to={`${currentPath}/home2`}
+            className={`${styles.tab} ${styles.tab_common}`}
+          >
+            Tutorial
+          </Link>
+        ) : null}
       </div>
       <Switch>
         <Route exact path={`${Routers.HomePage}/home1`} component={Home1Page} />

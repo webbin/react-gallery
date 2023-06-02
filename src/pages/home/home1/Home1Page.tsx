@@ -3,7 +3,7 @@ import styles from '../homepage.module.scss';
 
 export default function Home1Page() {
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <div className={styles.font_container}>
         <span>默认字体</span>
         <p>这是一段文字 ABCD abcd</p>

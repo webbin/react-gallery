@@ -4,7 +4,7 @@
  * @Author: zhengweibin
  */
 
-import { applyMiddleware, Action } from 'redux';
+import { Action } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';

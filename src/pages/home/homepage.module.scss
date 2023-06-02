@@ -3,7 +3,22 @@ $tab_container_bg: #383a3f;
 $tab_height: 42px;
 
 :export {
-  tab_height:$tab_height
+  tab_height: $tab_height;
+}
+
+.home_root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.router_group {
+  flex: 1;
+  margin-top: $tab_height;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -97,7 +112,6 @@ $tab_height: 42px;
 }
 
 .home_text_content {
-  margin-top: $tab_height;
   padding: 0px 30px;
 }
 

@@ -36,7 +36,7 @@ function App() {
     });
     windowSizeType = window.innerWidth > MIN_WIDTH ? 'Large' : 'Small';
     dispath(setWindowType(windowSizeType));
-    
+
     window.addEventListener('resize', () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -60,8 +60,8 @@ function App() {
   return (
     <Router>
       <TransitionGroup
-      // id="transition-group"
-      // className={styles.transition_group}
+        id="transition-group"
+        className={styles.transition_group}
       >
         <CSSTransition
           key={location.pathname}

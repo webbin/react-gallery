@@ -52,7 +52,7 @@ const RouterList = [
   {
     path: HomePage,
     component: HomePageComponent,
-    exact: false,
+    exact: true,
   },
   {
     path: WindowPage,
@@ -72,7 +72,7 @@ const RouterList = [
   {
     path: TransformPage,
     component: TransformPageComponent,
-    exact: false,
+    exact: true,
   },
   {
     path: ReactKeyPage,

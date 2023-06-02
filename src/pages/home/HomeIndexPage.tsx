@@ -7,6 +7,7 @@ import {
   Link,
   useRouteMatch,
 } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import { useAppSelector } from '../../reducers/hooks';
 import styles from './homepage.module.scss';
@@ -38,7 +39,7 @@ export default function HomeIndexPage(props: RouteComponentProps) {
   console.log('is small window ? ', isSmallWindow);
 
   return (
-    <div>
+    <div id="home_index_root" className={styles.home_root}>
       {isSmallWindow ? (
         <SideMenuView
           onRequestClose={() => {
@@ -83,11 +84,23 @@ export default function HomeIndexPage(props: RouteComponentProps) {
           </Link>
         ) : null}
       </div>
-      <Switch>
-        <Route exact path={`${Routers.HomePage}/home1`} component={Home1Page} />
-        <Route exact path={`${Routers.HomePage}/home2`} component={Home2Page} />
-        <Route exact path={`${match.url}`} component={HomePage} />
-      </Switch>
+      <TransitionGroup className={styles.router_group}>
+        <CSSTransition key={location.key} classNames="fade" timeout={300}>
+          <Switch location={location}>
+            <Route
+              exact
+              path={`${Routers.HomePage}/home1`}
+              component={Home1Page}
+            />
+            <Route
+              exact
+              path={`${Routers.HomePage}/home2`}
+              component={Home2Page}
+            />
+            <Route exact path={`${match.url}`} component={HomePage} />
+          </Switch>
+        </CSSTransition>
+      </TransitionGroup>
     </div>
   );
 }

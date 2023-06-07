@@ -19,6 +19,7 @@ import StationPageComponent from '../pages/stations/StationPage';
 import ColorPageComponent from '../pages/colors/ColorPage';
 import PieChartPageComponent from '../pages/chart/PieChartPage';
 import AlgorithmPageComponent from '../pages/algorithm/AlgorithmPage';
+import BatteryPageComponent from '../pages/battery/BatteryPage';
 
 const HomePage = '/home';
 const WindowPage = '/window';
@@ -32,6 +33,7 @@ const ColorPage = '/colors';
 const CanvasPage = '/canvas';
 const PieChartPage = '/piechart';
 const AlgorithmPage = '/algorithm';
+const BatteryPage = '/battery';
 
 export default {
   HomePage,
@@ -46,6 +48,7 @@ export default {
   PieChartPage,
   CanvasPage,
   AlgorithmPage,
+  BatteryPage,
 };
 
 const RouterList = [
@@ -107,6 +110,11 @@ const RouterList = [
   {
     path: AlgorithmPage,
     component: AlgorithmPageComponent,
+    exact: true,
+  },
+  {
+    path: BatteryPage,
+    component: BatteryPageComponent,
     exact: true,
   },
   {

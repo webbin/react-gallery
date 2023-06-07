@@ -144,6 +144,9 @@ const HomePage = () => {
         <li>
           <Link to={Routers.AlgorithmPage}>Algorithm</Link>
         </li>
+        <li>
+          <Link to={Routers.BatteryPage}>iPhone Battery</Link>
+        </li>
       </ul>
     </div>
   );

@@ -25,16 +25,16 @@ const config: Configuration = {
   devtool: 'source-map',
   entry: {
     index: './src/index.tsx',
-    vendor: [
-      'react',
-      'react-dom',
-      'react-router-dom',
-      'react-spring',
-      '@mui/material',
-      'antd-mobile',
-      'axios',
-      '@emotion/react',
-    ],
+    // vendor: [
+    //   'react',
+    //   'react-dom',
+    //   'react-router-dom',
+    //   'react-spring',
+    //   '@mui/material',
+    //   'antd-mobile',
+    //   'axios',
+    //   '@emotion/react',
+    // ],
   },
   module: {
     rules: [
@@ -108,6 +108,24 @@ const config: Configuration = {
             options: {
               name: '[name].[ext]',
               outputPath: 'fonts/',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.txt$/,
+        use: [
+          {
+            loader: 'raw-loader',
+            options: {
+              esModule: false,
+            },
+          },
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/',
             },
           },
         ],
@@ -253,27 +271,27 @@ const config: Configuration = {
     minimize: isProd,
     minimizer: [new CssMinimizerPlugin()],
     usedExports: true,
-    splitChunks: {
-      chunks: 'all',
-      // minSize: 0,
-      maxSize: 1024000,
-      minChunks: 2,
-      // maxAsyncRequests: 5,
-      // maxInitialRequests: 3,
-      // automaticNameDelimiter: '~',
-      // automaticNameMaxLength: 30,
-      // cacheGroups: {
-      //   vendors: {
-      //     test: /[\\/]node_modules[\\/]/,
-      //     priority: -10,
-      //   },
-      //   default: {
-      //     minChunks: 2,
-      //     priority: -20,
-      //     reuseExistingChunk: true,
-      //   },
-      // },
-    },
+    // splitChunks: {
+    //   chunks: 'async',
+    //   // minSize: 0,
+    //   maxSize: 1024000,
+    //   minChunks: 2,
+    //   // maxAsyncRequests: 5,
+    //   // maxInitialRequests: 3,
+    //   // automaticNameDelimiter: '~',
+    //   // automaticNameMaxLength: 30,
+    //   // cacheGroups: {
+    //   //   vendors: {
+    //   //     test: /[\\/]node_modules[\\/]/,
+    //   //     priority: -10,
+    //   //   },
+    //   //   default: {
+    //   //     minChunks: 2,
+    //   //     priority: -20,
+    //   //     reuseExistingChunk: true,
+    //   //   },
+    //   // },
+    // },
   },
   devServer: {
     // contentBase: './temp',

@@ -93,6 +93,8 @@ const getTimeData = (milSeconds: number) => {
   const minuteString = formattingValueString(minute);
   const secondString = formattingValueString(second);
 
+  const milliseconds = date.getMilliseconds()
+
   return {
     year,
     month,
@@ -101,6 +103,7 @@ const getTimeData = (milSeconds: number) => {
     hour,
     minute,
     second,
+    milliseconds,
 
     yearString,
     monthString,

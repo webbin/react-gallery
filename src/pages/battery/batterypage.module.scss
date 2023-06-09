@@ -1,27 +1,33 @@
 .upload_button {
   position: relative;
-  width: 100px;
+  // width: 100px;
   height: 40px;
-  background-color: #30a9de;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  align-items: center;
-
-  :hover {
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  cursor: grab;
+  border-radius: 6px;
+  margin: 30px 50px;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  &:hover {
     border-color: #aaa;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #30a9de;
   }
 }
 
 .upload_button span {
-  color: #fff;
+  color: #000;
+  font-weight: 600;
   // position: absolute;
   // top: 50%;
   // left: 50%;
   // transform: translate(-50%, -50%);
-  // margin-left: auto;
-  // margin-right: auto;
+  margin: auto;
+  cursor: grab;
 }
 
 .input {
@@ -37,13 +43,17 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: transparent;
   opacity: 0;
-  :hover {
-    border-color: #aaa;
-  }
 
   &:focus {
     outline: none;
     border-color: #66afe9;
     box-shadow: 0 0 4px #66afe9;
   }
+}
+
+.table {
+  border-width: 1px;
+  border-color: #000;
+  border-style: solid;
+  margin: 10px 40px;
 }

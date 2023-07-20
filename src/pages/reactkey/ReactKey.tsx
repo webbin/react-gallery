@@ -13,6 +13,7 @@ import { Button } from '@mui/material';
 interface ItemData {
   key: string;
   content: string;
+  color?: string;
 }
 
 interface ItemProp {
@@ -46,14 +47,15 @@ function ListItem(props: ItemProp) {
 }
 
 const MemoListItem = memo(ListItem);
+const OriginList = [
+  { key: 'a', content: 'aaa' },
+  { key: 'b', content: 'bbb' },
+  { key: 'c', content: 'ccc' },
+  { key: 'd', content: 'ddd' },
+];
 
 function ReactKey() {
-  const [list, setList] = useState<ItemData[]>([
-    { key: 'a', content: 'aaa' },
-    { key: 'b', content: 'bbb' },
-    { key: 'c', content: 'ccc' },
-    { key: 'd', content: 'ddd' },
-  ]);
+  const [list, setList] = useState<ItemData[]>(OriginList);
 
   return (
     <div>
@@ -81,8 +83,16 @@ function ReactKey() {
       >
         test Symbol
       </button>
-
       <Button
+        variant="contained"
+        onClick={() => {
+          setList(OriginList);
+        }}
+      >
+        Revert
+      </Button>
+      <Button
+        variant="contained"
         onClick={() => {
           setList((old) => {
             const next = Array.from(old);
@@ -92,12 +102,44 @@ function ReactKey() {
           });
         }}
       >
-        change list
+        change A Content
+      </Button>
+
+      <Button
+        variant="contained"
+        onClick={() => {
+          setList((old) => {
+            const next = Array.from(old);
+            next[0] = { key: '-a', content: '-a' };
+            return next;
+          });
+        }}
+      >
+        change A Key
+      </Button>
+
+      <Button
+        variant="contained"
+        onClick={() => {
+          setList((old) => {
+            const next = Array.from(old);
+            next.reverse();
+            return next;
+          });
+        }}
+      >
+        Change Order
       </Button>
 
       <div>
         {list.map((item) => {
-          return <ListItem key={item.key} data={item} />;
+          return (
+            // eslint-disable-next-line react/jsx-key
+            <ListItem
+              // key={item.key}
+              data={item}
+            />
+          );
         })}
       </div>
     </div>

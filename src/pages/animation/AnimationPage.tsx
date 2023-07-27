@@ -9,7 +9,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Button } from '@mui/material';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
 import styles from './animation.module.scss';
@@ -17,7 +17,7 @@ import Routers from '../../constants/Routers';
 import AnimationDice from '../../assets/dice_6.json';
 
 export default function AnimationPage() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [buttonVisible, setButtonVisible] = useState(true);
   const lottieRef = useRef<LottieRefCurrentProps | null>(null);
 
@@ -67,7 +67,7 @@ export default function AnimationPage() {
         <Button
           variant="contained"
           onClick={() => {
-            history.push(Routers.ReactSpringPage);
+            navigate(Routers.ReactSpringPage)
           }}
         >
           React Spring Page

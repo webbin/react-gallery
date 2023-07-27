@@ -9,7 +9,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 
-import { Link, Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
 
 import styles from './transformpage.module.scss';
 
@@ -80,11 +80,14 @@ function CellItem(props: { data: ICell }) {
 
 function TransformPage() {
   const [list, setList] = useState<ICell[]>([]);
-  const { url, path } = useRouteMatch();
+  // const { url, path } = useMatch({ caseSensitive:true });
+  const location = useLocation();
+  const path = location.pathname;
+  const url = location.pathname;
 
   useEffect(() => {
-    console.log('Transform page did mount: ', url);
-    console.log('Transform page did mount: ', path);
+    console.log('Transform page did mount, location : ', location);
+    // console.log('Transform page did mount: ', path);
     const now = Date.now();
     const res: ICell[] = [];
     for (let i = 0; i < 22; i += 1) {
@@ -112,26 +115,26 @@ function TransformPage() {
           <Link to={`${url}/detail`}>Transform Detial</Link>
         </li>
       </ul>
-      <Switch>
-        <Route exact path={`${path}/list`}>
+      <Routes>
+        <Route path={`${path}/list`}>
           {list.map((value) => {
             return <CellItem key={value.id} data={value} />;
           })}
         </Route>
-        <Route exact path={`${path}/detail`}>
+        <Route path={`${path}/detail`}>
           <div>Transform Detail with Id</div>
         </Route>
-        <Route exact path={`${path}/Component`}>
+        <Route path={`${path}/Component`}>
           <div>Transform Component</div>
         </Route>
-        <Route exact path={path}>
+        <Route path={path}>
           <h3>Please select a topic.</h3>
         </Route>
 
         <Route path={`${path}/:topicId`}>
           <div>Topic Id</div>
         </Route>
-      </Switch>
+      </Routes>
     </div>
   );
 }

@@ -9,17 +9,15 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { Button } from '@mui/material';
-import { RouteComponentProps } from 'react-router-dom';
 
 import ValueView from './ValueView';
 import styles from './window.module.scss';
 
-type Props = RouteComponentProps & {};
+type Props = {};
 
 const WindowPage = (props: Props) => {
   const widthRef = useRef(window.innerWidth);
   const [count, setCount] = useState(100);
-  const [historyState, setHistoryState] = useState('');
   const [user, setUser] = useState({
     name: 'Jake',
     height: 199,

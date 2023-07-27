@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
-import { Link, useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './sidemenu.module.scss';
 import homeStyles from './homepage.module.scss';
@@ -18,7 +18,7 @@ interface AnimationProps {
 
 export default function SideMenuView(prop: Props) {
   const { visible, onRequestClose } = prop;
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [ts, setTs] = useState('-100%');
   const style = useSpring<AnimationProps>({
@@ -33,7 +33,7 @@ export default function SideMenuView(prop: Props) {
   }, [visible]);
 
   useEffect(() => {
-    console.log('path name from side menu : ', history.location.pathname);
+    // console.log('path name from side menu : ', navigat);
   }, []);
 
   return (
@@ -44,7 +44,7 @@ export default function SideMenuView(prop: Props) {
       </div>
       <div
         onClick={() => {
-          history.push(`${Routers.HomePage}/home1`);
+          navigate(`${Routers.HomePage}/home1`);
           onRequestClose();
         }}
         style={{
@@ -56,7 +56,7 @@ export default function SideMenuView(prop: Props) {
       </div>
       <div
         onClick={() => {
-          history.push(`${Routers.HomePage}/home2`);
+          navigate(`${Routers.HomePage}/home2`);
           onRequestClose();
         }}
         style={{

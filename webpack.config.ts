@@ -7,21 +7,23 @@
  * @FilePath: /base-react-webpack-ts/webpack.config.ts
  */
 import path from 'path';
-import { Configuration as WebpackConfiguration, Plugin } from 'webpack';
-import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
+import { Configuration as WebpackConfiguration } from 'webpack';
+import 'webpack-dev-server';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+// import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 
-interface Configuration extends WebpackConfiguration {
-  devServer?: WebpackDevServerConfiguration;
-}
+// interface Configuration extends WebpackConfiguration {
+//   devServer?: WebpackDevServerConfiguration;
+// }
 
 console.log('process env: ', process.env.NODE_ENV);
 const isProd = process.env.NODE_ENV === 'production';
 
-const config: Configuration = {
+// const stylesHandler = MiniCssExtractPlugin.loader;
+
+const config: WebpackConfiguration = {
   devtool: 'source-map',
   entry: {
     index: './src/index.tsx',
@@ -56,10 +58,6 @@ const config: Configuration = {
                 {
                   regenerator: true,
                 },
-              ],
-              [
-                'babel-plugin-import',
-                { libraryName: 'antd-mobile', style: 'css' },
               ],
               ['@babel/plugin-transform-modules-commonjs'],
             ],
@@ -269,7 +267,7 @@ const config: Configuration = {
   },
   optimization: {
     minimize: isProd,
-    minimizer: [new CssMinimizerPlugin()],
+    // minimizer: [new CssMinimizerPlugin()],
     usedExports: true,
     // splitChunks: {
     //   chunks: 'async',
@@ -303,6 +301,12 @@ const config: Configuration = {
     host: '0.0.0.0',
     open: false,
     hot: true,
+    client: {
+      overlay: {
+        warnings: false,
+        errors: true,
+      },
+    },
     // publicPath: '/',
     // public: 'localhost:9876',
   },

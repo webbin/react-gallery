@@ -6,15 +6,15 @@
  * @Description: In User Settings Edit
  * @FilePath: /react-mobile/src/pages/HomePage.tsx
  */
-import React, { useEffect, useCallback, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 // import { Button, Drawer } from 'antd-mobile';
-import { Route, Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import Routers from '../../constants/Routers';
 import './home.css';
 import { addListener } from './ListenerComponent';
-import { useAppDispatch, useAppSelector } from '../../reducers/hooks';
+import { useAppSelector } from '../../reducers/hooks';
 import styles from './homepage.module.scss';
 
 interface HomeBtnProps {
@@ -47,8 +47,6 @@ function HomeButton(props: HomeBtnProps) {
 }
 
 const HomePage = () => {
-  const history = useHistory();
-  const dispatch = useAppDispatch();
   const status = useAppSelector((store) => store.homeData.homeStatus);
   const statusRef = useRef(status);
 

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {
   Route,
-  Switch,
-  useHistory,
-  RouteComponentProps,
+  Routes,
   Link,
-  useRouteMatch,
+  useLocation,
 } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -17,17 +15,14 @@ import Home2Page from './home2/Home2Page';
 import Routers from '../../constants/Routers';
 import SideMenuView from './SideMenuView';
 
-export default function HomeIndexPage(props: RouteComponentProps) {
-  const { location, match, history } = props;
-  const RouteMatch = useRouteMatch();
+export default function HomeIndexPage() {
+  const location = useLocation();
   const [menuVisible, setMenuVisible] = useState(false);
 
-  const currentPath = match.url === '/' ? Routers.HomePage : match.url;
+  const currentPath = location.pathname;
 
   useEffect(() => {
-    console.log(' location ', location);
-    console.log(' match ', match);
-    console.log(' RouteMatch ', RouteMatch);
+    console.log('Home Index page, location ', location);
     return () => {
       //
     };
@@ -86,19 +81,11 @@ export default function HomeIndexPage(props: RouteComponentProps) {
       </div>
       <TransitionGroup className={styles.router_group}>
         <CSSTransition key={location.key} classNames="fade" timeout={300}>
-          <Switch location={location}>
-            <Route
-              exact
-              path={`${Routers.HomePage}/home1`}
-              component={Home1Page}
-            />
-            <Route
-              exact
-              path={`${Routers.HomePage}/home2`}
-              component={Home2Page}
-            />
-            <Route exact path={`${match.url}`} component={HomePage} />
-          </Switch>
+          <Routes location={location}>
+            <Route path={`${Routers.HomePage}/home1`} element={<Home1Page />} />
+            <Route path={`${Routers.HomePage}/home2`} element={<Home2Page />} />
+            <Route path={`${location.pathname}`} element={<HomePage />} />
+          </Routes>
         </CSSTransition>
       </TransitionGroup>
     </div>

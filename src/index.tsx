@@ -4,19 +4,22 @@
  * @Author: zhengweibin
  */
 import React from 'react';
-import ReactDom from 'react-dom';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import store from './reducers/store';
 import App from './pages/main/App';
-import './GlobalHandler';
 
 const Index = () => {
   return (
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   );
 };
 
-ReactDom.render(<Index />, document.getElementById('root'));
+const root = createRoot(document.getElementById('root') as Element);
+root.render(<Index />);

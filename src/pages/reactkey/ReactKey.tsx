@@ -8,7 +8,7 @@
  */
 
 import React, { useState, useEffect, memo } from 'react';
-import { Button } from '@mui/material';
+import { Button } from 'antd';
 
 interface ItemData {
   key: string;
@@ -58,7 +58,6 @@ function ReactKey() {
   return (
     <div>
       <Button
-        variant="contained"
         onClick={() => {
           // const key = 'my Symbol';
           // const s1 = Symbol.for(key);

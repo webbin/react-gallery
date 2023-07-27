@@ -8,7 +8,7 @@
  */
 
 import React, { useRef, useState, useEffect } from 'react';
-import { Button } from '@mui/material';
+import { Button } from 'antd';
 
 import ValueView from './ValueView';
 import styles from './window.module.scss';
@@ -46,7 +46,6 @@ const WindowPage = (props: Props) => {
             return old + 100;
           });
         }}
-        variant="contained"
       >
         Count Add
       </Button>
@@ -58,7 +57,6 @@ const WindowPage = (props: Props) => {
           user.name = 'Mike';
           setUser(user);
         }}
-        variant="contained"
       >
         Chage User
       </Button>
@@ -77,14 +75,12 @@ const WindowPage = (props: Props) => {
             alert(`now = ${new Date()} -- 2`);
             alert(`now = ${new Date()} -- 3`);
           }}
-          variant="contained"
         >
           Alert
         </Button>
 
         <Button
           className={styles.button}
-          variant="contained"
           onClick={() => {
             const res = prompt('Prompt Test', 'test');
             if (res) {

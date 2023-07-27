@@ -9,7 +9,7 @@
 import React, { useEffect, useRef } from 'react';
 // import { Button, Drawer } from 'antd-mobile';
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button } from 'antd';
 
 import Routers from '../../constants/Routers';
 import './home.css';
@@ -36,7 +36,6 @@ function HomeButton(props: HomeBtnProps) {
         marginBottom: 10,
         cursor: 'pointer',
       }}
-      variant="contained"
       onClick={onClick}
       // title={title}
       // lowerCase

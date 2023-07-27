@@ -8,7 +8,7 @@
  */
 
 import React, { useRef, useState, useCallback, useEffect } from 'react';
-import { Button } from '@mui/material';
+import { Button } from 'antd';
 
 import MasonryView from '../../components/MasonryView';
 
@@ -66,7 +66,7 @@ function MasonryPage() {
 
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <Button variant="contained" onClick={onAdd}>
+      <Button onClick={onAdd}>
         Add
       </Button>
       <MasonryView

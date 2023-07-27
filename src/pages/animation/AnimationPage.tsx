@@ -8,7 +8,7 @@
  */
 
 import React, { useState, useRef } from 'react';
-import { Button } from '@mui/material';
+import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
@@ -65,7 +65,6 @@ export default function AnimationPage() {
         }}
       >
         <Button
-          variant="contained"
           onClick={() => {
             navigate(Routers.ReactSpringPage)
           }}

@@ -6,14 +6,18 @@
  * @Description: content
  * @FilePath: /base-react-webpack-ts/src/App.tsx
  */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Route, useNavigate, Routes } from 'react-router-dom';
+// import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import type { MenuItemProps } from 'antd';
 import {
-  Route,
-  useNavigate,
-  Routes,
-} from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-
+  HomeOutlined,
+  LaptopOutlined,
+  ToolOutlined,
+  ReadOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 
 import './App.css';
@@ -23,6 +27,7 @@ import HomeIndexPage from '../home/HomeIndexPage';
 import DevelopmentTestPage from './home_content/DevelopmentTestPage';
 import DocumentsPage from './home_content/DocumentsPage';
 import ToolsPage from './home_content/ToolsPage';
+import Logo from './Logo';
 
 import { RouterList } from '../../constants/Routers';
 import { setWindowType } from '../../reducers/actions';
@@ -35,10 +40,27 @@ const { Sider, Header, Footer, Content } = Layout;
 let windowSizeType: IWindowType;
 const MIN_WIDTH = 420;
 
+function generateMenuItem(props: {
+  name: string;
+  // path?: string;
+  onClick?: () => void;
+  icon?: React.ReactNode;
+}) {
+  const { name, onClick, icon } = props;
+  return {
+    key: name,
+    title: name,
+    label: name,
+    onClick,
+    icon,
+  };
+}
+
 function App() {
   // const location = useLocation();
   const navigate = useNavigate();
   const dispath = useAppDispatch();
+  const [fold, setFold] = useState(false);
 
   useEffect(() => {
     // window.history
@@ -117,59 +139,64 @@ function App() {
   // );
 
   return (
-    <Layout>
-      <Sider>
-        <div>webbin.cn</div>
-        <Menu
-          theme='dark'
-          items={[
-            {
-              key: 'Home',
-              title: 'Home',
-              onClick: () => {
-                navigate('/home');
-              },
-            },
-            {
-              key: 'Developemt Test',
-              title: 'Developemt Test',
-              onClick: () => {
-                navigate('/development_test');
-              },
-            },
-            {
-              key: 'Documents',
-              title: 'Documents',
-              onClick: () => {
-                navigate('/documents');
-              },
-            },
-            {
-              key: 'Tools',
-              title: 'Tools',
-              onClick: () => {
-                navigate('/tools');
-              },
-            },
-          ]}
-        ></Menu>
-      </Sider>
+    <Layout style={{ height: '100%' }}>
+      <Header>
+        <Logo />
+        <div>This is Header</div>
+      </Header>
+
       <Layout>
-        <Header>
-          <div>This is Header</div>
-        </Header>
+        <Sider
+          collapsed={fold}
+          breakpoint="xs"
+          onBreakpoint={(broken) => {
+            setFold(broken);
+          }}
+        >
+          <Menu
+            theme="dark"
+            items={[
+              generateMenuItem({
+                name: 'Home',
+                icon: <HomeOutlined />,
+                onClick: () => {
+                  navigate('/home');
+                },
+              }),
+              generateMenuItem({
+                name: 'Developemt Test',
+                icon: <LaptopOutlined />,
+                onClick: () => {
+                  navigate('/development_test');
+                },
+              }),
+              generateMenuItem({
+                name: 'Documents',
+                icon: <ReadOutlined />,
+                onClick: () => {
+                  navigate('/documents');
+                },
+              }),
+              generateMenuItem({
+                name: 'Tools',
+                icon: <ToolOutlined />,
+                onClick: () => {
+                  navigate('/tools');
+                },
+              }),
+            ]}
+          ></Menu>
+          <div></div>
+        </Sider>
         <Content>
           <Routes>
-            <Route path='/' element={<HomeIndexPage />} />
-            <Route path='/home' element={<HomeIndexPage />} />
-            <Route path='/development_test' element={<DevelopmentTestPage />} />
-            <Route path='/documents' element={<DocumentsPage />} />
-            <Route path='/tools' element={<ToolsPage />} />
+            <Route path="/" element={<HomeIndexPage />} />
+            <Route path="/home" element={<HomeIndexPage />} />
+            <Route path="/development_test" element={<DevelopmentTestPage />} />
+            <Route path="/documents" element={<DocumentsPage />} />
+            <Route path="/tools" element={<ToolsPage />} />
           </Routes>
         </Content>
-        <Footer>
-          <div>Footer</div>
-        </Footer>
       </Layout>
     </Layout>
   );

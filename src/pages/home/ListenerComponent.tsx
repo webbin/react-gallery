@@ -8,7 +8,7 @@
  */
 import React, { useRef } from 'react';
 
-import { Button } from '@mui/material';
+import { Button } from 'antd';
 
 import { useAppDispatch } from '../../reducers/hooks';
 import { setHomeStatus } from '../../reducers/actions';
@@ -30,7 +30,6 @@ const ListenerComponent = () => {
   return (
     <div>
       <Button
-        variant="contained"
         onClick={() => {
           count.current += 1;
           console.log('Listener length = ', Listeners.length);

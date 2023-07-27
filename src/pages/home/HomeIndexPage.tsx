@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Route,
-  Routes,
-  Link,
-  useLocation,
-} from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { Route, Routes, Link, useLocation } from 'react-router-dom';
+// import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
+import { Layout, Breadcrumb } from 'antd';
 
 import { useAppSelector } from '../../reducers/hooks';
 import styles from './homepage.module.scss';
@@ -33,61 +30,79 @@ export default function HomeIndexPage() {
   );
   console.log('is small window ? ', isSmallWindow);
 
+  // return (
+  //   <div id="home_index_root" className={styles.home_root}>
+  //     {isSmallWindow ? (
+  //       <SideMenuView
+  //         onRequestClose={() => {
+  //           setMenuVisible(false);
+  //         }}
+  //         visible={menuVisible}
+  //       />
+  //     ) : null}
+  //     <div className={styles.tab_container}>
+  //       {isSmallWindow ? (
+  //         <div
+  //           style={{ userSelect: 'none' }}
+  //           className={`${styles.tab} ${styles.tab_common}`}
+  //           onClick={() => {
+  //             setMenuVisible((old) => !old);
+  //           }}
+  //         >
+  //           Menu
+  //         </div>
+  //       ) : null}
+  //       <Link
+  //         to={Routers.HomePage}
+  //         className={`${styles.tab} ${styles.tab_common}`}
+  //       >
+  //         Home
+  //       </Link>
+  //       <div style={{ flex: 1 }}></div>
+  //       {!isSmallWindow ? (
+  //         <Link
+  //           to={`${currentPath}/home1`}
+  //           className={`${styles.tab} ${styles.tab_common}`}
+  //         >
+  //           Getting Start
+  //         </Link>
+  //       ) : null}
+  //       {!isSmallWindow ? (
+  //         <Link
+  //           to={`${currentPath}/home2`}
+  //           className={`${styles.tab} ${styles.tab_common}`}
+  //         >
+  //           Tutorial
+  //         </Link>
+  //       ) : null}
+  //     </div>
+  //     <TransitionGroup className={styles.router_group}>
+  //       <CSSTransition key={location.key} classNames="fade" timeout={300}>
+  //         <Routes location={location}>
+  //           <Route path={`${Routers.HomePage}/home1`} element={<Home1Page />} />
+  //           <Route path={`${Routers.HomePage}/home2`} element={<Home2Page />} />
+  //           <Route path={`${location.pathname}`} element={<HomePage />} />
+  //         </Routes>
+  //       </CSSTransition>
+  //     </TransitionGroup>
+  //   </div>
+  // );
+
   return (
-    <div id="home_index_root" className={styles.home_root}>
-      {isSmallWindow ? (
-        <SideMenuView
-          onRequestClose={() => {
-            setMenuVisible(false);
-          }}
-          visible={menuVisible}
-        />
-      ) : null}
-      <div className={styles.tab_container}>
-        {isSmallWindow ? (
-          <div
-            style={{ userSelect: 'none' }}
-            className={`${styles.tab} ${styles.tab_common}`}
-            onClick={() => {
-              setMenuVisible((old) => !old);
-            }}
-          >
-            Menu
-          </div>
-        ) : null}
-        <Link
-          to={Routers.HomePage}
-          className={`${styles.tab} ${styles.tab_common}`}
-        >
-          Home
-        </Link>
-        <div style={{ flex: 1 }}></div>
-        {!isSmallWindow ? (
-          <Link
-            to={`${currentPath}/home1`}
-            className={`${styles.tab} ${styles.tab_common}`}
-          >
-            Getting Start
-          </Link>
-        ) : null}
-        {!isSmallWindow ? (
-          <Link
-            to={`${currentPath}/home2`}
-            className={`${styles.tab} ${styles.tab_common}`}
-          >
-            Tutorial
-          </Link>
-        ) : null}
-      </div>
-      <TransitionGroup className={styles.router_group}>
-        <CSSTransition key={location.key} classNames="fade" timeout={300}>
-          <Routes location={location}>
-            <Route path={`${Routers.HomePage}/home1`} element={<Home1Page />} />
-            <Route path={`${Routers.HomePage}/home2`} element={<Home2Page />} />
-            <Route path={`${location.pathname}`} element={<HomePage />} />
-          </Routes>
-        </CSSTransition>
-      </TransitionGroup>
-    </div>
+    <>
+      <Breadcrumb
+        items={[
+          {
+            title: <Link to={`${currentPath}`}>Home</Link>,
+            key: 'Home',
+          },
+        ]}
+      ></Breadcrumb>
+      <Routes>
+        <Route path={`${Routers.HomePage}/home1`} element={<Home1Page />} />
+        <Route path={`${Routers.HomePage}/home2`} element={<Home2Page />} />
+        <Route path={`${location.pathname}`} element={<HomePage />} />
+      </Routes>
+    </>
   );
 }

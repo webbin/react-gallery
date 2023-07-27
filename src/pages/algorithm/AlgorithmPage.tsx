@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Select } from '@mui/material';
-
-import MenuItem from '@mui/material/MenuItem';
 
 import styles from './algorithmpage.module.scss';
-
 import HtmlPageMap from './HtmlPageMap';
 
 type IRect = { width: number; height: number };
@@ -44,7 +40,7 @@ export default function AlgorithmPage() {
 
   return (
     <div className={styles.root}>
-      <Select
+      {/* <Select
         style={{
           backgroundColor: '#000',
           color: '#eee',
@@ -68,7 +64,7 @@ export default function AlgorithmPage() {
             </MenuItem>
           );
         })}
-      </Select>
+      </Select> */}
       <iframe
         onChange={() => {
           console.log('iframe on change');

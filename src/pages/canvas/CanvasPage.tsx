@@ -8,7 +8,7 @@
  */
 import * as React from 'react';
 import { useEffect, useState, useRef } from 'react';
-import { Button } from '@mui/material';
+import { Button } from 'antd';
 
 type Position = {
   x: number;
@@ -118,7 +118,6 @@ const CanvasPage = () => {
             setImageBase64(data);
           }
         }}
-        variant="contained"
       >
         Generate
       </Button>

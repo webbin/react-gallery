@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from '@mui/material';
+import { Button } from 'antd';
 
 import styles from './batterypage.module.scss';
 import data from '../../assets/text/charge1.txt';
@@ -128,7 +128,6 @@ export default function BatteryPage() {
   return (
     <div>
       <Button
-        variant="contained"
         onClick={() => {
           console.log(data.length);
         }}

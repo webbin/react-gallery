@@ -237,9 +237,9 @@ const config: WebpackConfiguration = {
   plugins: [
     new ForkTsCheckerWebpackPlugin({
       async: false,
-      eslint: {
-        files: ['./src/**/*.ts', './src/**/*.tsx'],
-      },
+      // eslint: {
+      //   files: ['./src/**/*.ts', './src/**/*.tsx'],
+      // },
     }),
     new HtmlWebpackPlugin({
       filename: 'index.html',

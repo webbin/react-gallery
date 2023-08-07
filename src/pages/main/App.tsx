@@ -140,7 +140,7 @@ function App() {
 
   return (
     <Layout style={{ height: '100%' }}>
-      <Header>
+      <Header style={{ paddingLeft: 20 }}>
         <Logo />
         <div>This is Header</div>
       </Header>
@@ -188,10 +188,10 @@ function App() {
           ></Menu>
           <div></div>
         </Sider>
-        <Content>
+        <Content style={{ overflowY: 'scroll' }}>
           <Routes>
             <Route path="/" element={<HomeIndexPage />} />
-            <Route path="/home" element={<HomeIndexPage />} />
+            <Route path="/home/*" element={<HomeIndexPage />} />
             <Route path="/development_test" element={<DevelopmentTestPage />} />
             <Route path="/documents" element={<DocumentsPage />} />
             <Route path="/tools" element={<ToolsPage />} />

@@ -6,11 +6,44 @@ import { Layout, Breadcrumb } from 'antd';
 
 import { useAppSelector } from '../../reducers/hooks';
 import styles from './homepage.module.scss';
+
 import HomePage from './HomePage';
 import Home1Page from './home1/Home1Page';
 import Home2Page from './home2/Home2Page';
+import StationPage from '../stations/StationPage';
+import TransformPage from '../transform/TransformPage';
+import CanvasPage from '../canvas/CanvasPage';
+import WindowPage from '../window/WindowPage';
+import AnimationPage from '../animation/AnimationPage';
+import MasonryPage from '../masonry/MasonryPage';
+import ColorPage from '../colors/ColorPage';
+import AlgorithmPage from '../algorithm/AlgorithmPage';
+
 import Routers from '../../constants/Routers';
 import SideMenuView from './SideMenuView';
+
+const RouteConfig = [
+  {
+    path: 'stations',
+    component: <StationPage />,
+  },
+  {
+    path: 'transform/*',
+    component: <TransformPage />,
+  },
+  {
+    path: 'home1',
+    component: <Home1Page />,
+  },
+  {
+    path: 'home2',
+    component: <Home2Page />,
+  },
+  {
+    path: '',
+    component: <HomePage />,
+  },
+];
 
 export default function HomeIndexPage() {
   const location = useLocation();
@@ -99,9 +132,10 @@ export default function HomeIndexPage() {
         ]}
       ></Breadcrumb>
       <Routes>
-        <Route path={`${Routers.HomePage}/home1`} element={<Home1Page />} />
-        <Route path={`${Routers.HomePage}/home2`} element={<Home2Page />} />
-        <Route path={`${location.pathname}`} element={<HomePage />} />
+        {RouteConfig.map((item) => {
+          const { component } = item;
+          return <Route path={item.path} element={component} key={item.path} />;
+        })}
       </Routes>
     </>
   );

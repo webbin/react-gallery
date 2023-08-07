@@ -1,15 +1,18 @@
+import { Route, Routes, Link } from 'react-router-dom';
 
-
-import { Route, Routes} from 'react-router-dom';
-
-import React from 'react'
+import React from 'react';
 
 import ColorPage from '../../colors/ColorPage';
 
 export default function DevelopmentTestPage() {
   return (
-    <Routes>
-      <Route path='/color' element={<ColorPage />} />
-    </Routes>
-  )
+    <div>
+      <div>
+        <Link to="color">Go To Color Page</Link>
+      </div>
+      <Routes>
+        <Route path="color" element={<ColorPage />} />
+      </Routes>
+    </div>
+  );
 }

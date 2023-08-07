@@ -22,17 +22,17 @@ import AlgorithmPageComponent from '../pages/algorithm/AlgorithmPage';
 import BatteryPageComponent from '../pages/battery/BatteryPage';
 
 const HomePage = '/home';
-const WindowPage = '/window';
-const AnimationPage = '/animation';
-const ReactSpringPage = '/reactspring';
-const TransformPage = '/transform';
-const ReactKeyPage = '/reactkey';
-const MasonryPage = '/masonry';
-const StationPage = '/stations';
-const ColorPage = '/colors';
-const CanvasPage = '/canvas';
-const PieChartPage = '/piechart';
-const AlgorithmPage = '/algorithm';
+const WindowPage = '/home/window';
+const AnimationPage = '/home/animation';
+const ReactSpringPage = '/home/reactspring';
+const TransformPage = '/home/transform';
+const ReactKeyPage = '/home/reactkey';
+const MasonryPage = '/home/masonry';
+const StationPage = '/home/stations';
+const ColorPage = '/home/colors';
+const CanvasPage = '/home/canvas';
+const PieChartPage = '/home/piechart';
+const AlgorithmPage = '/home/algorithm';
 const BatteryPage = '/battery';
 
 export default {

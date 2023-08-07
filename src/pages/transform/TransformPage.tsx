@@ -106,34 +106,33 @@ function TransformPage() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to={`${url}/list`}>Transform List</Link>
+          <Link to={`list`}>Transform List</Link>
         </li>
         <li>
-          <Link to={`${url}/component`}>Component</Link>
+          <Link to={`component`}>Component</Link>
         </li>
         <li>
-          <Link to={`${url}/detail`}>Transform Detial</Link>
+          <Link to={`detail`}>Transform Detial</Link>
         </li>
       </ul>
       <Routes>
-        <Route path={`${path}/list`}>
-          {list.map((value) => {
+        <Route
+          path={`list`}
+          element={list.map((value) => {
             return <CellItem key={value.id} data={value} />;
           })}
-        </Route>
-        <Route path={`${path}/detail`}>
-          <div>Transform Detail with Id</div>
-        </Route>
-        <Route path={`${path}/Component`}>
-          <div>Transform Component</div>
-        </Route>
-        <Route path={path}>
-          <h3>Please select a topic.</h3>
-        </Route>
+        ></Route>
+        <Route
+          path={`detail`}
+          element={<div>Transform Detail with Id</div>}
+        ></Route>
+        <Route
+          path={`Component`}
+          element={<div>Transform Component</div>}
+        ></Route>
+        <Route path={path} element={<h3>Please select a topic.</h3>}></Route>
 
-        <Route path={`${path}/:topicId`}>
-          <div>Topic Id</div>
-        </Route>
+        <Route path={`:topicId`} element={<div>Topic Id</div>} />
       </Routes>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Route, Routes, Link, useLocation } from 'react-router-dom';
 // import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -8,19 +8,11 @@ import { useAppSelector } from '../../reducers/hooks';
 import styles from './homepage.module.scss';
 
 import HomePage from './HomePage';
-import Home1Page from './home1/Home1Page';
-import Home2Page from './home2/Home2Page';
 import StationPage from '../stations/StationPage';
 import TransformPage from '../transform/TransformPage';
-import CanvasPage from '../canvas/CanvasPage';
 import WindowPage from '../window/WindowPage';
-import AnimationPage from '../animation/AnimationPage';
-import MasonryPage from '../masonry/MasonryPage';
-import ColorPage from '../colors/ColorPage';
-import AlgorithmPage from '../algorithm/AlgorithmPage';
 
-import Routers from '../../constants/Routers';
-import SideMenuView from './SideMenuView';
+// import SideMenuView from './SideMenuView';
 
 const RouteConfig = [
   {
@@ -32,12 +24,8 @@ const RouteConfig = [
     component: <TransformPage />,
   },
   {
-    path: 'home1',
-    component: <Home1Page />,
-  },
-  {
-    path: 'home2',
-    component: <Home2Page />,
+    path: 'window',
+    component: <WindowPage />,
   },
   {
     path: '',
@@ -47,9 +35,30 @@ const RouteConfig = [
 
 export default function HomeIndexPage() {
   const location = useLocation();
-  const [menuVisible, setMenuVisible] = useState(false);
+  console.log('home index path: ', location.pathname);  
 
-  const currentPath = location.pathname;
+  const crumbs = useMemo(() => {
+    if (location.pathname === '/') {
+      return [{
+        title: <Link to='/'>Home</Link>,
+        key: 'Home',
+      }];
+    }
+    const pathSnippets = location.pathname.split('/').filter((i) => i);
+    // console.log('path snippets ', pathSnippets);
+
+    return pathSnippets.map((item, index) => {
+      let path = 'home';
+      if (index > 0) {
+        path = pathSnippets.slice(0, index + 1).join('/');
+      }
+      // console.log('item ', item, ', path: ', path);
+      return {
+        title: <Link to={`/${path}`}>{item}</Link>,
+        key: item,
+      };
+    });
+  }, [location.pathname]);
 
   useEffect(() => {
     console.log('Home Index page, location ', location);
@@ -124,13 +133,14 @@ export default function HomeIndexPage() {
   return (
     <>
       <Breadcrumb
-        items={[
-          {
-            title: <Link to={`${currentPath}`}>Home</Link>,
-            key: 'Home',
-          },
-        ]}
-      ></Breadcrumb>
+        style={{
+          paddingTop: 20,
+          paddingBottom: 20,
+          paddingLeft: 40,
+          paddingRight: 40,
+        }}
+        items={crumbs}
+      />
       <Routes>
         {RouteConfig.map((item) => {
           const { component } = item;

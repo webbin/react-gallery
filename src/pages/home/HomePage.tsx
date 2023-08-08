@@ -124,25 +124,7 @@ const HomePage = () => {
           <Link to={Routers.TransformPage}>Transform</Link>
         </li>
         <li>
-          <Link to={Routers.CanvasPage}>Canvas</Link>
-        </li>
-        <li>
           <Link to={Routers.WindowPage}>Window</Link>
-        </li>
-        <li>
-          <Link to={Routers.AnimationPage}>Animation</Link>
-        </li>
-        <li>
-          <Link to={Routers.MasonryPage}>Masonry</Link>
-        </li>
-        <li>
-          <Link to={Routers.ColorPage}>Colors</Link>
-        </li>
-        <li>
-          <Link to={Routers.AlgorithmPage}>Algorithm</Link>
-        </li>
-        <li>
-          <Link to={Routers.BatteryPage}>iPhone Battery</Link>
         </li>
       </ul>
     </div>

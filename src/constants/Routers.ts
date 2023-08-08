@@ -21,19 +21,26 @@ import PieChartPageComponent from '../pages/chart/PieChartPage';
 import AlgorithmPageComponent from '../pages/algorithm/AlgorithmPage';
 import BatteryPageComponent from '../pages/battery/BatteryPage';
 
+// Home
 const HomePage = '/home';
 const WindowPage = '/home/window';
-const AnimationPage = '/home/animation';
-const ReactSpringPage = '/home/reactspring';
 const TransformPage = '/home/transform';
-const ReactKeyPage = '/home/reactkey';
-const MasonryPage = '/home/masonry';
 const StationPage = '/home/stations';
-const ColorPage = '/home/colors';
-const CanvasPage = '/home/canvas';
-const PieChartPage = '/home/piechart';
-const AlgorithmPage = '/home/algorithm';
+
+// Development Test
+const AnimationPage = '/animation';
+const ReactSpringPage = '/reactspring';
+const ReactKeyPage = '/reactkey';
+const MasonryPage = '/masonry';
+const CanvasPage = '/canvas';
+const PieChartPage = '/piechart';
+
+// Documentation
+const AlgorithmPage = '/algorithm';
+
+// Tools
 const BatteryPage = '/battery';
+const ColorPage = '/colors';
 
 export default {
   HomePage,

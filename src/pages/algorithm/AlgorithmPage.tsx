@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+import { Select, Typography, SelectProps } from 'antd';
+import type { MenuProps } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+
 import styles from './algorithmpage.module.scss';
 import HtmlPageMap from './HtmlPageMap';
 
 type IRect = { width: number; height: number };
-type IMenu = {
-  key: string;
-  name: string;
-  path: string;
-};
+// type IMenuList = MenuProps['items'];
+
+type SelectOptions = SelectProps['options'];
 
 export default function AlgorithmPage() {
   const frameRef = useRef<HTMLIFrameElement | null>(null);
   const [rect, setRect] = useState<IRect>({ width: 0, height: 0 });
-  const [menus, setMenus] = useState<IMenu[]>([]);
+  const [menus, setMenus] = useState<SelectOptions>([]);
   const [valueSelected, setValueSelected] = useState('0');
   useEffect(() => {
     setRect({
@@ -25,9 +27,11 @@ export default function AlgorithmPage() {
         const v = HtmlPageMap[k];
         const splits = v.split('/');
         return {
+          className: styles.select_option,
           key: k,
-          name: splits[splits.length - 1].replace('.html', ''),
-          path: v,
+          label: splits[splits.length - 1].replace('.html', ''),
+          // path: v,
+          value: k,
         };
       })
     );
@@ -65,6 +69,15 @@ export default function AlgorithmPage() {
           );
         })}
       </Select> */}
+      <Select
+        className={styles.select}
+        options={menus}
+        defaultValue={'0'}
+        onChange={(value, option) => {
+          console.log('on change ', value);
+          setValueSelected(value);
+        }}
+      ></Select>
       <iframe
         onChange={() => {
           console.log('iframe on change');

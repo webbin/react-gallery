@@ -9,7 +9,8 @@ export default function Logo() {
         color: 'white',
       }}
     >
-      webbin.cn
+      {/* webbin.cn */}
+      React + Redux
     </div>
   );
 }

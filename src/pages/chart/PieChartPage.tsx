@@ -19,5 +19,9 @@ export default function PieChartPage() {
     };
   }, []);
 
-  return <PieChart data={data} width={300} height={300} />;
+  return (
+    <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+      <PieChart data={data} width={300} height={300} />
+    </div>
+  );
 }

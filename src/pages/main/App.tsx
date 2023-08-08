@@ -164,6 +164,7 @@ function App() {
 
       <Layout>
         <Sider
+          className={styles.sider}
           collapsed={fold}
           breakpoint="xs"
           onBreakpoint={(broken) => {
@@ -241,7 +242,7 @@ function App() {
                       navigate(Routers.PieChartPage);
                     },
                   }),
-                ]
+                ],
               }),
               generateMenuItem({
                 name: 'Documents',
@@ -289,22 +290,25 @@ function App() {
                       navigate(Routers.ColorPage);
                     },
                   }),
-                ]
+                ],
               }),
             ]}
           ></Menu>
           <div>Sider Footer</div>
         </Sider>
-        <Content style={{ overflowY: 'scroll' }}>
+        <Content style={{ overflowY: 'auto' }}>
           <Routes>
             <Route path="/" element={<HomeIndexPage />} />
             <Route path="/home/*" element={<HomeIndexPage />} />
             <Route path="/home1" element={<Home1Page />} />
             <Route path="/home2" element={<Home2Page />} />
-            
+
             {/* Development */}
             <Route path={Routers.AnimationPage} element={<AnimationPage />} />
-            <Route path={Routers.ReactSpringPage} element={<ReactSpringPage />} />
+            <Route
+              path={Routers.ReactSpringPage}
+              element={<ReactSpringPage />}
+            />
             <Route path={Routers.ReactKeyPage} element={<ReactKey />} />
             <Route path={Routers.MasonryPage} element={<MasonryPage />} />
             <Route path={Routers.CanvasPage} element={<CanvasPage />} />
@@ -315,7 +319,6 @@ function App() {
 
             <Route path={Routers.BatteryPage} element={<BatteryPage />} />
             <Route path={Routers.ColorPage} element={<ColorPage />} />
-
           </Routes>
         </Content>
       </Layout>

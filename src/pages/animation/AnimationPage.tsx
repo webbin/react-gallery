@@ -8,16 +8,13 @@
  */
 
 import React, { useState, useRef } from 'react';
-import { Button } from 'antd';
-import { useNavigate } from 'react-router-dom';
+// import { Button } from 'antd';
 import Lottie, { LottieRefCurrentProps } from 'lottie-react';
 
 import styles from './animation.module.scss';
-import Routers from '../../constants/Routers';
 import AnimationDice from '../../assets/dice_6.json';
 
 export default function AnimationPage() {
-  const navigate = useNavigate();
   const [buttonVisible, setButtonVisible] = useState(true);
   const lottieRef = useRef<LottieRefCurrentProps | null>(null);
 
@@ -55,22 +52,6 @@ export default function AnimationPage() {
             transition: 'transform 500ms',
           }}
         ></div>
-      </div>
-      <div
-        style={{
-          marginLeft: 30,
-          marginRight: 30,
-          marginTop: 20,
-          marginBottom: 30,
-        }}
-      >
-        <Button
-          onClick={() => {
-            navigate(Routers.ReactSpringPage)
-          }}
-        >
-          React Spring Page
-        </Button>
       </div>
       <div
         style={{

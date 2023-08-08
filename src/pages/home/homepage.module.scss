@@ -146,3 +146,23 @@ $tab_height: 42px;
 .home2_item {
   display: block;
 }
+
+.breadcumb {
+  color: #000;
+  a {
+    text-align: center;
+    padding: 0px;
+    border-radius: 20px;
+    margin: 0;
+    font-weight: 600;
+    height: auto;
+    color: #000;
+    font-size: 1rem;
+    opacity: 1;
+  }
+
+  a:hover {
+    text-decoration-line: underline;
+    background-color: trans;
+  }
+}

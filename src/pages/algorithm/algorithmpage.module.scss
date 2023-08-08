@@ -1,10 +1,23 @@
-
 .root {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   background-color: #000;
+  overflow-y: hidden;
+}
+
+.root::-webkit-scrollbar {
+  width: 10px;
+  background-color: transparent;
+}
+.root::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.root::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba (0, 0, 0, 0.3);
+  background-color: #555;
 }
 
 .frame {
@@ -12,13 +25,27 @@
   border-width: 0;
   flex: 1;
 }
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
 .frame::-webkit-scrollbar {
   width: 10px;
+  background-color: transparent;
+}
+/*定义滚动条轨道 内阴影+圆角*/
+.frame::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+/*定义滑块 内阴影+圆角*/
+.frame::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba (0, 0, 0, 0.3);
+  background-color: #555;
 }
 
 .select {
   background-color: #000;
   color: #eee;
+  margin: 20px 20px 10px 20px;
 }
 
 .popup_menu {

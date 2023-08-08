@@ -42,6 +42,7 @@ export default function HomeIndexPage() {
       return [{
         title: <Link to='/'>Home</Link>,
         key: 'Home',
+        className: styles.breadcumb,
       }];
     }
     const pathSnippets = location.pathname.split('/').filter((i) => i);
@@ -56,6 +57,7 @@ export default function HomeIndexPage() {
       return {
         title: <Link to={`/${path}`}>{item}</Link>,
         key: item,
+        className: styles.breadcumb,
       };
     });
   }, [location.pathname]);
@@ -134,9 +136,9 @@ export default function HomeIndexPage() {
     <>
       <Breadcrumb
         style={{
-          paddingTop: 20,
-          paddingBottom: 20,
-          paddingLeft: 40,
+          paddingTop: 10,
+          paddingBottom: 0,
+          paddingLeft: 30,
           paddingRight: 40,
         }}
         items={crumbs}

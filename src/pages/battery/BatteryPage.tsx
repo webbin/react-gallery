@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'antd';
+import { Button, Table } from 'antd';
+import { Line } from '@ant-design/charts';
 
 import styles from './batterypage.module.scss';
-import data from '../../assets/text/charge1.txt';
+import ChargeText1 from '../../assets/text/charge1.txt';
 
 // 时间：2023年6月9日 10:22
 // 位置：中国
@@ -54,6 +55,13 @@ type IChargeProcess = {
   endValue: number;
   speed: number;
   duration: number;
+};
+
+type IMonthSection = {
+  year: number;
+  month: number;
+  startIndex: number;
+  endIndex: number;
 };
 
 const convertChargeDataList = (str: string) => {
@@ -125,73 +133,128 @@ export default function BatteryPage() {
     }
   }, []);
 
+  const tableColums = [
+    {
+      key: 'speed',
+      dataIndex: 'speed',
+      title: '充电速度',
+    },
+    {
+      key: 'duration',
+      dataIndex: 'duration',
+      title: '时长',
+    },
+    {
+      key: 'startValue',
+      dataIndex: 'startValue',
+      title: '开始值',
+    },
+    {
+      key: 'endValue',
+      dataIndex: 'endValue',
+      title: '完成值',
+    },
+    {
+      key: 'startTime',
+      dataIndex: 'startTime',
+      title: '开始时间',
+    },
+    {
+      key: 'endTime',
+      dataIndex: 'endTime',
+      title: '结束时间',
+    },
+    {
+      key: 'address',
+      dataIndex: 'address',
+      title: '地址',
+    },
+  ];
+
   return (
     <div>
-      <Button
-        onClick={() => {
-          console.log(data.length);
-        }}
-      >
-        Load Local Data
-      </Button>
-      <div className={styles.upload_button}>
-        <input
-          className={styles.input}
-          type="file"
-          onChange={(e) => {
-            const { files } = e.target;
-            if (files && files.length) {
-              const file = files.item(0);
-              if (file) {
-                console.log('read file: ', file.name);
-                console.log('read file size: ', file.size);
+      <div className={styles.top_header}>
+        <Button
+          className={styles.load_local_data_button}
+          onClick={() => {
+            const list = convertChargeDataList(ChargeText1);
+            console.log('charge data list: ', list);
+            list.reverse();
+            const chargeProcess = convertList2ChargeProcess(list);
+            console.log('charge process: ', chargeProcess);
+            setChargeList(chargeProcess);
 
-                const reader = new FileReader(); // 创建一个FileReader对象
+            
 
-                reader.onload = function (event) {
-                  const contents = event.target?.result; // 读取文件内容
-                  // alert('文件内容：' + contents);
-                  // console.log(contents);
-                  if (contents) {
-                    const str = contents.toString();
-                    const list = convertChargeDataList(str);
-                    list.reverse();
-                    console.log('charge data list length: ', list.length);
+          }}
+        >
+          Load Local Data
+        </Button>
+        <div className={styles.upload_button}>
+          <input
+            className={styles.input}
+            type="file"
+            onChange={(e) => {
+              const { files } = e.target;
+              if (files && files.length) {
+                const file = files.item(0);
+                if (file) {
+                  console.log('read file: ', file.name);
+                  console.log('read file size: ', file.size);
 
-                    // const sm = list.slice(0, 30);
-                    // console.log(sm);
-                    const charge = convertList2ChargeProcess(list);
-                    // console.log(charge);
-                    setChargeList(charge);
-                  }
-                };
-                reader.readAsText(file); // 以文本格式读取文件内容
+                  const reader = new FileReader(); // 创建一个FileReader对象
+
+                  reader.onload = function (event) {
+                    const contents = event.target?.result; // 读取文件内容
+                    // alert('文件内容：' + contents);
+                    // console.log(contents);
+                    if (contents) {
+                      const str = contents.toString();
+                      const list = convertChargeDataList(str);
+                      list.reverse();
+                      console.log('charge data list length: ', list.length);
+
+                      // const sm = list.slice(0, 30);
+                      // console.log(sm);
+                      const charge = convertList2ChargeProcess(list);
+                      // console.log(charge);
+                      setChargeList(charge);
+                    }
+                  };
+                  reader.readAsText(file); // 以文本格式读取文件内容
+                }
               }
-            }
+            }}
+          />
+          <span>选择文件</span>
+        </div>
+      </div>
+
+      {chargeList.length ? (
+        <Line
+          className={styles.line_chart}
+          data={chargeList}
+          height={400}
+          xField="startTime"
+          yField="speed"
+          tooltip={{
+            fields: [
+              'startTime',
+              'endTime',
+              'startValue',
+              'endValue',
+              'address',
+            ],
           }}
         />
-        <span>Choose File</span>
-      </div>
+      ) : null}
       {chargeList.length ? (
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Head1</th>
-              <th>Head2</th>
-              <th>Head3</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>item1</td>
-              <td>item2</td>
-            </tr>
-            <tr>
-              <td>item1</td>
-              <td>item2</td>
-            </tr>
-          </tbody>
-        </table>
+        <Table
+          className={styles.table}
+          columns={tableColums}
+          dataSource={chargeList}
+          rowKey="startTime"
+        />
       ) : null}
     </div>
   );

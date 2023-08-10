@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Table } from 'antd';
+import React, { useEffect, useState, useRef } from 'react';
+import { Button, Table, Select, Space } from 'antd';
 import { Line } from '@ant-design/charts';
+import type { SelectProps } from 'antd';
 
 import styles from './batterypage.module.scss';
 import ChargeText1 from '../../assets/text/charge1.txt';
+import TimeUtils from '../../utils/TimeUtils';
 
 // 时间：2023年6月9日 10:22
 // 位置：中国
@@ -18,6 +20,8 @@ type IChargeData = {
   address: string;
   value: number;
 };
+
+type SelectOption = Required<SelectProps>['options'][number];
 
 const parseTimestamp = (str: string): number => {
   const res = str.matchAll(/(\d+)年(\d+)月(\d+)日 (\d+):(\d+)/g);
@@ -64,6 +68,49 @@ type IMonthSection = {
   endIndex: number;
 };
 
+type IYearSection = {
+  year: number;
+  monthList: IMonthSection[];
+};
+
+const TableColums = [
+  {
+    key: 'speed',
+    dataIndex: 'speed',
+    title: '充电速度',
+  },
+  {
+    key: 'duration',
+    dataIndex: 'duration',
+    title: '时长',
+  },
+  {
+    key: 'startValue',
+    dataIndex: 'startValue',
+    title: '开始值',
+  },
+  {
+    key: 'endValue',
+    dataIndex: 'endValue',
+    title: '完成值',
+  },
+  {
+    key: 'startTime',
+    dataIndex: 'startTime',
+    title: '开始时间',
+  },
+  {
+    key: 'endTime',
+    dataIndex: 'endTime',
+    title: '结束时间',
+  },
+  {
+    key: 'address',
+    dataIndex: 'address',
+    title: '地址',
+  },
+];
+
 const convertChargeDataList = (str: string) => {
   const separator = '----------------';
   const splits = str.split(separator);
@@ -81,6 +128,11 @@ const convertChargeDataList = (str: string) => {
 
 const convertList2ChargeProcess = (list: IChargeData[]) => {
   const res: IChargeProcess[] = [];
+
+  const chargeYearSectionList: IYearSection[] = [];
+  let currentYear = 0;
+  let currentMonth = 0;
+
   for (let i = 0; i < list.length; ) {
     const data1 = list[i];
     if (data1.value === 100) {
@@ -100,6 +152,37 @@ const convertList2ChargeProcess = (list: IChargeData[]) => {
 
       // console.log('data1: ', data1);
       // console.log('data2: ', data2);
+      const index = res.length;
+
+      const { year, month } = TimeUtils.getTimeData(data1.timestamp);
+      const section: IMonthSection = {
+        year,
+        month,
+        startIndex: index,
+        endIndex: 0,
+      };
+      if (year !== currentYear || month !== currentMonth) {
+        const lastYearSection =
+          chargeYearSectionList[chargeYearSectionList.length - 1];
+        if (lastYearSection) {
+          const lastMonthSection =
+            lastYearSection.monthList[lastYearSection.monthList.length - 1];
+          if (lastMonthSection.endIndex === 0) {
+            lastMonthSection.endIndex = index;
+          }
+        }
+        if (year !== currentYear) {
+          chargeYearSectionList.push({
+            year,
+            monthList: [section],
+          });
+        } else {
+          lastYearSection.monthList.push(section);
+        }
+        currentYear = year;
+        currentMonth = month;
+      }
+
       res.push({
         address: data2.address,
         startTime: data1.time,
@@ -116,60 +199,104 @@ const convertList2ChargeProcess = (list: IChargeData[]) => {
       i += 1;
     }
   }
-  return res;
+
+  const lastYearSection =
+    chargeYearSectionList[chargeYearSectionList.length - 1];
+  if (lastYearSection) {
+    const lastMonthSection =
+      lastYearSection.monthList[lastYearSection.monthList.length - 1];
+    if (lastMonthSection.endIndex === 0) {
+      lastMonthSection.endIndex = res.length;
+    }
+  }
+
+  return {
+    chargeProcess: res,
+    chargeYearSectionList,
+  };
 };
 
 export default function BatteryPage() {
   const [chargeList, setChargeList] = useState<IChargeProcess[]>([]);
 
+  const [lineChartData, setLineChartData] = useState<IChargeProcess[]>([]);
+  const [chargeYearOptions, setChargeYearOptions] = useState<SelectOption[]>(
+    []
+  );
+  const [selectSection, setSelectSection] = useState<IMonthSection>({
+    year: 0,
+    month: 0,
+    startIndex: 0,
+    endIndex: 0,
+  });
+  const [chargeMonthOptions, setChargeMonthOptions] = useState<SelectOption[]>(
+    []
+  );
+
+  const yearSectionsRef = useRef<IYearSection[]>([]);
+
   useEffect(() => {
-    const str = '2023年6月9日 10:22';
-    const res = str.matchAll(/(\d+)年(\d+)月(\d+)日 (\d+):(\d+)/g);
-    if (res) {
-      const array = res.next().value;
-      const [all, year, month, day, hour, minute] = array;
-      const date = new Date(year, month - 1, day, hour, minute, 0);
-      console.log(date.toLocaleString());
-    }
+    // const str = '2023年6月9日 10:22';
+    // const res = str.matchAll(/(\d+)年(\d+)月(\d+)日 (\d+):(\d+)/g);
+    // if (res) {
+    //   const array = res.next().value;
+    //   const [all, year, month, day, hour, minute] = array;
+    //   const date = new Date(year, month - 1, day, hour, minute, 0);
+    //   console.log(date.toLocaleString());
+    // }
   }, []);
 
-  const tableColums = [
-    {
-      key: 'speed',
-      dataIndex: 'speed',
-      title: '充电速度',
-    },
-    {
-      key: 'duration',
-      dataIndex: 'duration',
-      title: '时长',
-    },
-    {
-      key: 'startValue',
-      dataIndex: 'startValue',
-      title: '开始值',
-    },
-    {
-      key: 'endValue',
-      dataIndex: 'endValue',
-      title: '完成值',
-    },
-    {
-      key: 'startTime',
-      dataIndex: 'startTime',
-      title: '开始时间',
-    },
-    {
-      key: 'endTime',
-      dataIndex: 'endTime',
-      title: '结束时间',
-    },
-    {
-      key: 'address',
-      dataIndex: 'address',
-      title: '地址',
-    },
-  ];
+  const initOptions = (sections: IYearSection[]) => {
+    const yearOptions: SelectOption[] = [];
+    const monthOptions: SelectOption[] = [];
+
+    const [first] = sections;
+
+    sections.forEach((section) => {
+      const { year } = section;
+      yearOptions.push({
+        value: year,
+        label: `${year}年`,
+      });
+    });
+    first.monthList.forEach((section) => {
+      const { month } = section;
+      monthOptions.push({
+        value: month,
+        label: `${month}月`,
+      });
+    });
+
+    setSelectSection(first.monthList[0]);
+    setChargeYearOptions(yearOptions);
+    setChargeMonthOptions(monthOptions);
+  };
+
+  const updateMonthOptions = (year: number) => {
+    const list = yearSectionsRef.current;
+    for (let i = 0; i < list.length; i += 1) {
+      const { year: y, monthList } = list[i];
+      if (year === y) {
+        const monthOptions: SelectOption[] = [];
+
+        monthList.forEach((section) => {
+          const { month } = section;
+          monthOptions.push({
+            value: month,
+            label: `${month}月`,
+          });
+        });
+        setChargeMonthOptions(monthOptions);
+        setSelectSection(monthList[0]);
+        break;
+      }
+    }
+  };
+
+  useEffect(() => {
+    const { startIndex, endIndex } = selectSection;
+    setLineChartData(chargeList.slice(startIndex, endIndex));
+  }, [chargeList, selectSection]);
 
   return (
     <div>
@@ -180,12 +307,11 @@ export default function BatteryPage() {
             const list = convertChargeDataList(ChargeText1);
             console.log('charge data list: ', list);
             list.reverse();
-            const chargeProcess = convertList2ChargeProcess(list);
-            console.log('charge process: ', chargeProcess);
-            setChargeList(chargeProcess);
-
-            
-
+            const result = convertList2ChargeProcess(list);
+            console.log('charge process: ', result);
+            setChargeList(result.chargeProcess);
+            initOptions(result.chargeYearSectionList);
+            yearSectionsRef.current = result.chargeYearSectionList;
           }}
         >
           Load Local Data
@@ -216,9 +342,9 @@ export default function BatteryPage() {
 
                       // const sm = list.slice(0, 30);
                       // console.log(sm);
-                      const charge = convertList2ChargeProcess(list);
+                      const { chargeProcess } = convertList2ChargeProcess(list);
                       // console.log(charge);
-                      setChargeList(charge);
+                      setChargeList(chargeProcess);
                     }
                   };
                   reader.readAsText(file); // 以文本格式读取文件内容
@@ -230,10 +356,49 @@ export default function BatteryPage() {
         </div>
       </div>
 
-      {chargeList.length ? (
+      <Space className={styles.selector_row} size={20}>
+        <Select
+          defaultValue={selectSection.year}
+          className={styles.select}
+          value={selectSection.year}
+          options={chargeYearOptions}
+          onChange={(value) => {
+            updateMonthOptions(value);
+          }}
+        />
+        <Select
+          className={styles.select}
+          options={chargeMonthOptions}
+          defaultValue={selectSection.month}
+          value={selectSection.month}
+          onChange={(value) => {
+            setSelectSection((old) => {
+              const { year } = old;
+              const list = yearSectionsRef.current;
+              let section = old;
+              for (let i = 0; i < list.length; i += 1) {
+                const { year: y, monthList } = list[i];
+                if (year === y) {
+                  for (let j = 0; j < monthList.length; j += 1) {
+                    const { month } = monthList[j];
+                    if (value === month) {
+                      section = monthList[j];
+                      break;
+                    }
+                  }
+                  break;
+                }
+              }
+              return section;
+            });
+          }}
+        />
+      </Space>
+
+      {lineChartData.length ? (
         <Line
           className={styles.line_chart}
-          data={chargeList}
+          data={lineChartData}
           height={400}
           xField="startTime"
           yField="speed"
@@ -251,7 +416,7 @@ export default function BatteryPage() {
       {chargeList.length ? (
         <Table
           className={styles.table}
-          columns={tableColums}
+          columns={TableColums}
           dataSource={chargeList}
           rowKey="startTime"
         />

@@ -299,34 +299,6 @@
           }
           updateImageData(i, nextValue);
         }
-
-        const isBackground = r === 255 && g === 255 && b === 255 && a === 255;
-        const isForgeGround = r === 0 && g === 0 && b === 0 && a === 255;
-        // let newColor;
-        // let formatedColor;
-
-        if (isBackground) {
-          // newColor = getColor(col, imgWidth, backgroundColors);
-          // formatedColor = formatColor(newColor);
-          // modifyImageData(i, formatedColor);
-        } else if (isForgeGround) {
-          // newColor = getColor(col, imgWidth, forgegroundColors);
-          // formatedColor = formatColor(newColor);
-          // modifyImageData(i, formatedColor);
-        } else {
-          // console.log(`row: ${row}, col: ${col}`);
-          // console.log('point color: ', compositeColor(r, g, b, a));
-          // newColor = getColor(col, imgWidth, backgroundColors);
-          // formatedColor = formatColor(newColor);
-          // formatedColor = formateBoundColor([r, g, b, a], formatedColor);
-          // modifyImageData(i, formatedColor);
-          // if (row === 105) {
-          //   // console.log(`row: ${row}, col: ${col}`);
-          //   // console.log('point color: ', compositeColor(r, g, b, a));
-          //   // console.log('delta: ', delta);
-          //   // console.log('formated color: ', formatedColor);
-          // }
-        }
       }
 
       context.putImageData(imageData, 0, 0);

@@ -10,6 +10,8 @@ import * as React from 'react';
 import { useEffect, useState, useRef } from 'react';
 import { Button } from 'antd';
 
+import InsetView from './InsetView';
+
 type Position = {
   x: number;
   y: number;
@@ -86,6 +88,31 @@ const CanvasPage = () => {
   return (
     <div>
       <p>Canvas</p>
+      <InsetView
+        text="Github"
+        width={300}
+        height={300}
+        backgroundColors={[
+          {
+            color: 'rgb(255,255,255)',
+            percent: 0.5,
+          },
+          {
+            color: 'rgb(192,192,192)',
+            percent: 0.5,
+          },
+        ]}
+        forgegroundColors={[
+          {
+            color: 'rgb(255,192,22)',
+            percent: 0.5,
+          },
+          {
+            color: 'rgb(23,212,99)',
+            percent: 0.5,
+          },
+        ]}
+      />
       <div>{`mouse x = ${mousePosition.x}, mouse y = ${mousePosition.y}`}</div>
       <div>{`${mousePosition.rgba}`}</div>
       <canvas

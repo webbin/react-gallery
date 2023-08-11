@@ -75,37 +75,7 @@
       function compositeColor(r, g, b, a) {
         return `(${r},${g},${b},${a})`;
       }
-
-      function interpolate(
-        array,
-        inputStart,
-        inputEnd,
-        targetStart,
-        targetEnd
-      ) {
-        const [first] = array;
-        const result = [];
-        let span = 0;
-        let factor = 0;
-        let targetSpan = 0;
-
-        if (first === inputStart) {
-          result.push(targetStart);
-          span = inputEnd - inputStart;
-          targetSpan = targetEnd - targetStart;
-        } else if (first === inputEnd) {
-          result.push(targetEnd);
-          targetSpan = targetStart - targetEnd;
-          span = inputStart - inputEnd;
-        }
-
-        for (let i = 1; i < array.length; i += 1) {
-          const delta = array[i] - array[i - 1];
-          factor = (delta / span) * targetSpan;
-          result.push(result[i - 1] + factor);
-        }
-      }
-
+      
       function formatColor(color, alpha) {
         let result = [0, 0, 0, 0];
         if (color[0] === '#') {

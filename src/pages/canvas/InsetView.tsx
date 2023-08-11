@@ -107,7 +107,7 @@ export default function InsetView(props: Props) {
       if (context) {
         context.fillStyle = '#fff';
         context.fillRect(0, 0, CanvasWidth, CanvasHeight);
-        
+
         context.textBaseline = 'middle';
         context.fillStyle = '#000';
         context.font = font;
@@ -119,7 +119,6 @@ export default function InsetView(props: Props) {
         const { data, width: imgWidth, height: imgHeight } = imageData;
         let row = 0;
         let col = 0;
-        const delta: number[] = [];
         // 包含以 RGBA 顺序的数据
         console.log('image data Uint8ClampedArray: ', data.length);
 
@@ -139,10 +138,10 @@ export default function InsetView(props: Props) {
         const accValues = [0, 0, 0, 0];
 
         for (let i = 0; i < data.length; i += 1) {
-          const r = data[i];
-          const g = data[i + 1];
-          const b = data[i + 2];
-          const a = data[i + 3];
+          // const r = data[i];
+          // const g = data[i + 1];
+          // const b = data[i + 2];
+          // const a = data[i + 3];
 
           const targetBackground = getColor(col, imgWidth, backgroundColors);
           const targetForgeground = getColor(col, imgWidth, forgegroundColors);
@@ -170,6 +169,7 @@ export default function InsetView(props: Props) {
             }
             // continue;
           }
+
           let delta = 0;
           const accValue = 0;
 

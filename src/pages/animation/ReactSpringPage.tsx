@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSpring, animated, useTransition } from 'react-spring';
+import RoleListView from './RoleListView'
 
 interface Props {
   title: string;
@@ -141,6 +142,7 @@ function ReactSpringPage() {
       </div>
 
       <FlipCard />
+      <RoleListView />
     </div>
   );
 }

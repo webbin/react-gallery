@@ -166,3 +166,42 @@ $tab_height: 42px;
     background-color: trans;
   }
 }
+
+.throttle_button {
+  display: block;
+  margin: 10px 0;
+  border-radius: 8px;
+  padding: 5px 20px;
+  border-width: 1px;
+  animation: breathing_shadow 3s infinite;
+}
+
+/* 伪元素的样式，模拟模糊边框 */
+// .throttle_button::before {
+//   content: '';
+//   position: absolute;
+//   top: -10px;
+//   left: -10px;
+//   right: -10px;
+//   bottom: -10px;
+//   z-index: -1;
+//   // background: inherit;
+//   // border-radius: inherit;
+//   filter: blur(10px); /* 设置高斯模糊半径 */
+// }
+
+// .throttle_button:hover {
+//   box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
+// }
+
+@keyframes breathing_shadow {
+  0% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    box-shadow: none;
+  }
+}

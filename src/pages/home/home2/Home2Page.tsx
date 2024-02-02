@@ -1,4 +1,5 @@
 import React, { useRef, useCallback, useState } from 'react';
+import { Button } from 'antd';
 
 import TimeUtils from '../../../utils/TimeUtils';
 import styles from '../homepage.module.scss';
@@ -55,14 +56,16 @@ export default function Home2Page() {
     <div style={{ flex: 1 }}>
       <div className={styles.home_text_content}>
         <p className={styles.home_title}>Configuring Your Store</p>
-        <button
+        <Button
           onClick={() => {
             setList([]);
           }}
         >
           Clear
+        </Button>
+        <button className={styles.throttle_button} onClick={onclick}>
+          Throttle
         </button>
-        <button onClick={onclick}>Throttle</button>
       </div>
 
       <div>

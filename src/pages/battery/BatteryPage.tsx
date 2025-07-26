@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
+// import second from '@mui';
 
 import styles from './batterypage.module.scss';
-import data from '../../assets/text/charge1.txt';
+import ChargeText from '../../assets/text/charge1.txt';
 
 // 时间：2023年6月9日 10:22
 // 位置：中国
@@ -126,11 +127,20 @@ export default function BatteryPage() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.root}>
       <Button
         variant="contained"
         onClick={() => {
-          console.log(data.length);
+          // console.log(data);
+          const list = convertChargeDataList(ChargeText);
+          list.reverse();
+          console.log('charge data list length: ', list.length);
+
+          // const sm = list.slice(0, 30);
+          // console.log(sm);
+          const charge = convertList2ChargeProcess(list);
+          // console.log(charge);
+          setChargeList(charge);
         }}
       >
         Load Local Data
@@ -177,20 +187,42 @@ export default function BatteryPage() {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>Head1</th>
-              <th>Head2</th>
-              <th>Head3</th>
+              <th className={styles.table_header_item}>Index</th>
+              <th className={styles.table_header_item}>Speed</th>
+              <th className={styles.table_header_item}>Duration</th>
+              <th className={styles.table_header_item}>Stat Time</th>
+              <th className={styles.table_header_item}>End Time</th>
+              <th className={styles.table_header_item}>Start Value</th>
+              <th className={styles.table_header_item}>End Value</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>item1</td>
-              <td>item2</td>
-            </tr>
-            <tr>
-              <td>item1</td>
-              <td>item2</td>
-            </tr>
+            {chargeList.map((item, index) => {
+              const {
+                startTime,
+                endTime,
+                startValue,
+                endValue,
+                speed,
+                duration,
+              } = item;
+              return (
+                <tr
+                  key={index}
+                  style={{
+                    backgroundColor: index % 2 === 0 ? '#eee' : '#ddd',
+                  }}
+                >
+                  <td className={styles.table_cell}>{index}</td>
+                  <td className={styles.table_cell}>{speed.toFixed(2)}%/h</td>
+                  <td className={styles.table_cell}>{duration}s</td>
+                  <td className={styles.table_cell}>{startTime}</td>
+                  <td className={styles.table_cell}>{endTime}</td>
+                  <td className={styles.table_cell}>{startValue}</td>
+                  <td className={styles.table_cell}>{endValue}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       ) : null}

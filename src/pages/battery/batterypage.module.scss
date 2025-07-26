@@ -1,3 +1,10 @@
+
+.root {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+
 .upload_button {
   position: relative;
   // width: 100px;
@@ -53,7 +60,25 @@
 
 .table {
   border-width: 1px;
-  border-color: #000;
+  border-color: #ccc;
   border-style: solid;
   margin: 10px 40px;
+  overflow-x: scroll;
+  min-width: 750px;
+}
+
+.table th :nth-child(1) {
+  width: 80px;
+  padding: 20px 0;
+}
+
+.table_header_item {
+  padding: 10px 20px;
+  background-color: #ccc;
+  color: #000;
+}
+
+.table_cell {
+  padding: 10px 20px;
+  color: #000;
 }

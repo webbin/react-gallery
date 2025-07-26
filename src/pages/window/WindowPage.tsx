@@ -40,6 +40,28 @@ const WindowPage = (props: Props) => {
         paddingRight: 30,
       }}
     >
+      <div
+        style={{
+          width: 500,
+          height: 500,
+          borderWidth: 1,
+          display: 'flex',
+        }}
+      >
+        <span
+          style={{
+            fontSize: 50,
+            margin: 'auto',
+            textAlign: 'center',
+            width: 100,
+            lineHeight: '50px',
+            transform: 'scale(3)',
+          }}
+        >
+          个人转租
+        </span>
+      </div>
+
       <ValueView value={count} />
       <Button
         onClick={() => {

@@ -147,6 +147,9 @@ const HomePage = () => {
         <li>
           <Link to={Routers.BatteryPage}>iPhone Battery</Link>
         </li>
+        <li>
+          <Link to={Routers.RentPage}>租房搜索</Link>
+        </li>
       </ul>
     </div>
   );

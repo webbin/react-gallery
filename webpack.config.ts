@@ -121,13 +121,13 @@ const config: Configuration = {
               esModule: false,
             },
           },
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'assets/',
-            },
-          },
+          // {
+          //   loader: 'file-loader',
+          //   options: {
+          //     name: '[name].[ext]',
+          //     outputPath: 'assets/',
+          //   },
+          // },
         ],
       },
       //html模板加载器，可以处理引用的静态资源，默认配置参数attrs=img:src，处理图片的src引用的资源
